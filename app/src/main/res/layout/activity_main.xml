@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:textSize="13dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginLeft="310dp"
+        />
+
+    <TextView
+        android:id="@+id/selamatdatang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Selamat Datang"
+        android:textColor="#434242"
+        android:textSize="45sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Silahkan Login Terlebih Dahulu!"
+        android:textColor="#434242"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="291dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_login" />
+
+    <EditText
+        android:layout_width="354dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:background="@drawable/custom_input"
+        android:paddingLeft="10dp"
+        android:drawablePadding="12dp"
+        android:drawableStart="@drawable/custom_input_email"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textSize="14sp"/>
+
+    <EditText
+        android:layout_width="354dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:background="@drawable/custom_input"
+        android:paddingLeft="10dp"
+        android:drawablePadding="12dp"
+        android:drawableStart="@drawable/custom_input_lock"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="14sp"/>
+
+    <Button
+        android:layout_width="354dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="Login"
+        android:textAlignment="center"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/custom_button"
+        android:textColor="@color/white"
+        />
+</LinearLayout>

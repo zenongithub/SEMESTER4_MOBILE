@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_beranda"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_beranda" />
+
+    <item
+        android:id="@+id/navigation_simpan"
+        android:icon="@drawable/baseline_bookmark_24"
+        android:title="@string/title_simpan" />
+
+    <item
+        android:id="@+id/navigation_keranjang"
+        android:icon="@drawable/baseline_shopping_cart_24"
+        android:title="@string/title_keranjang" />
+
+    <item
+        android:id="@+id/navigation_transaksi"
+        android:icon="@drawable/baseline_dvr_24"
+        android:title="@string/title_transaksi" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="@string/title_profile" />
+</menu>
