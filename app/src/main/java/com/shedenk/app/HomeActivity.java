@@ -30,8 +30,8 @@ public class HomeActivity extends AppCompatActivity {
                 R.id.navigation_beranda, R.id.navigation_simpan, R.id.navigation_keranjang, R.id.navigation_transaksi, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.home_page);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
     }
 
 }

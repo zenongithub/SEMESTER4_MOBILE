@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/txtregister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register"
@@ -73,13 +74,14 @@
         android:textSize="14sp"/>
 
     <Button
+        android:id="@+id/btnlogin"
         android:layout_width="354dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
         android:text="Login"
         android:textAlignment="center"
         android:layout_marginLeft="20dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_click_button"
         android:textColor="@color/white"
         />
 </LinearLayout>
