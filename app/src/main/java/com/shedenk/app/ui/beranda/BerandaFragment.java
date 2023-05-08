@@ -22,15 +22,13 @@ public class BerandaFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        sliderView = (sliderView).findViewById(R.id.image_slider);
-        SliderAdapter sliderAdapter = new SliderAdapter(images);
-
-        sliderView.setSliderAdapter(sliderAdapter);
-        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
-        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
-        sliderView.startAutoCycle();
-
+//        sliderView = (sliderView).findViewById(R.id.image_slider);
+//        SliderAdapter sliderAdapter = new SliderAdapter(images);
+//
+//        sliderView.setSliderAdapter(sliderAdapter);
+//        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+//        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+//        sliderView.startAutoCycle();
         return inflater.inflate(R.layout.fragment_beranda,container,false);
     }
 
@@ -39,5 +37,4 @@ public class BerandaFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 }
