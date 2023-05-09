@@ -1,12 +1,12 @@
 package com.shedenk.app.ui.beranda;
 
+import com.smarteist.autoimageslider.SliderViewAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.shedenk.app.R;
-import com.smarteist.autoimageslider.SliderViewAdapter;
 
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.ViewHolder> {
 
@@ -20,7 +20,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.ViewHolder> {
     public SliderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.slider_item_beranda,parent,false);
+                .inflate(R.layout.image_slider,parent,false);
 
         return new ViewHolder(view);
     }
@@ -42,7 +42,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
 
-        imageView = itemView.findViewById(R.id.image_view);
+            imageView = itemView.findViewById(R.id.image_view);
         }
     }
 }
