@@ -1,5 +1,7 @@
 package com.shedenk.app.ui.beranda;
 
+import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,16 @@ import java.util.ArrayList;
 
 public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder> {
 
+    private
     ArrayList<ProdukItemModel> dataItem;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView textId;
         TextView textNama;
         TextView textHarga;
+        TextView textDeskripsi;
+        TextView textUkuran;
         ImageView imageProduk;
 
         public ViewHolder(@NonNull View itemView) {
@@ -28,6 +34,8 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
 
             textNama = itemView.findViewById(R.id.nama_produk);
             textHarga = itemView.findViewById(R.id.harga_produk);
+            textDeskripsi = itemView.findViewById(R.id.deskripsi_produk);
+            textUkuran = itemView.findViewById(R.id.ukuran_produk);
             imageProduk = itemView.findViewById(R.id.image_produk);
         }
     }
@@ -46,13 +54,39 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
     @Override
     public void onBindViewHolder(@NonNull AdapterRecyclerView.ViewHolder holder, int position) {
 
-        TextView text_nama = holder.textNama;
-        TextView text_harga = holder.textHarga;
-        ImageView image_produk = holder.imageProduk;
+        ProdukItemModel produkItemModel = dataItem.get(position);
+//        TextView text_id = holder.textId;
+//        TextView text_nama = holder.textNama;
+//        TextView text_deskripsi = holder.textDeskripsi;
+//        TextView text_ukuran = holder.textUkuran;
+//        TextView text_harga = holder.textHarga;
+//        ImageView image_produk = holder.imageProduk;
+//
+////        text_id.setText(dataItem.get(position).getId());
+//        text_nama.setText(dataItem.get(position).getNama());
+//        text_deskripsi.setText(dataItem.get(position).getDeskripsi());
+//        text_ukuran.setText(dataItem.get(position).getUkuran());
+//        text_harga.setText(dataItem.get(position).getHarga());
+//        image_produk.setImageResource(dataItem.get(position).getGambar());
 
-        text_nama.setText(dataItem.get(position).getNama());
-        text_harga.setText(dataItem.get(position).getHarga());
-        image_produk.setImageResource(dataItem.get(position).getProduk());
+        holder.textNama.setText(produkItemModel.getNama());
+        holder.textHarga.setText(produkItemModel.getHarga());
+        holder.textDeskripsi.setText(produkItemModel.getDeskripsi());
+        holder.textUkuran.setText(produkItemModel.getUkuran());
+        holder.imageProduk.setImageResource(produkItemModel.getGambar());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),DetailProduk.class);
+                intent.putExtra("nama", produkItemModel.getNama());
+                intent.putExtra("harga", produkItemModel.getHarga());
+                intent.putExtra("deskripsi", produkItemModel.getDeskripsi());
+                intent.putExtra("ukuran", produkItemModel.getUkuran());
+                intent.putExtra("gambar", produkItemModel.getGambar());
+                view.getContext().startActivity(intent);
+            }
+        });
 
     }
 

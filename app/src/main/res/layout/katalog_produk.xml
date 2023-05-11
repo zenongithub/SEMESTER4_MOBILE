@@ -45,6 +45,17 @@
                     android:layout_height="wrap_content"
                     android:text="Rp.5.000.000"/>
 
+                <TextView
+                    android:id="@+id/deskripsi_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rp.5.000.000"/>
+                <TextView
+                    android:id="@+id/ukuran_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rp.5.000.000"/>
+
             </LinearLayout>
 
         </RelativeLayout>

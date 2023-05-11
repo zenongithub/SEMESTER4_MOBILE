@@ -1,5 +1,6 @@
 package com.shedenk.app.ui.beranda;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,7 +21,7 @@ import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
 
-public class BerandaFragment extends Fragment {
+public class BerandaFragment extends Fragment{
 
     SliderView sliderView;
     int[] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3, R.drawable.slide4,};
@@ -49,11 +50,14 @@ public class BerandaFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         data = new ArrayList<>();
-        for (int i = 0 ; i <ProdukItem.namaproduk.length; i++){
+        for (int i = 0 ; i <ProdukItem.id.length; i++){
             data.add(new ProdukItemModel(
+                   ProdukItem.id[i],
                    ProdukItem.namaproduk[i],
                    ProdukItem.harga[i],
-                   ProdukItem.produk[i]
+                   ProdukItem.deskripsi[i],
+                   ProdukItem.ukuran[i],
+                   ProdukItem.gambar[i]
             ));
         }
 

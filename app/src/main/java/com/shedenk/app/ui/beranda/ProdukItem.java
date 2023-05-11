@@ -4,9 +4,9 @@ import com.shedenk.app.R;
 
 public class ProdukItem {
 
-    static int[] produk = {
-            R.drawable.p1,
-            R.drawable.p2
+    static String[] id = {
+            "P00O1",
+            "P0002"
     };
 
     static String[] namaproduk = {
@@ -18,4 +18,21 @@ public class ProdukItem {
             "Rp. 5.000.000",
             "Rp. 2.500.000"
     };
+
+    static String[] deskripsi = {
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley"
+    };
+
+    static String[] ukuran = {
+            "XL",
+            "L"
+    };
+
+    static int[] gambar = {
+            R.drawable.p1,
+            R.drawable.p2
+    };
+
+
 }
