@@ -44,7 +44,16 @@
                     android:id="@+id/harga_produk_simpan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="Rp.5.000.000" />
+
+                <TextView
+                    android:id="@+id/ukuran_simpan_produk"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="XL"
+                    android:textSize="15sp"/>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

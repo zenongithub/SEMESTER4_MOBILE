@@ -92,6 +92,26 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btn_simpan"
+                android:layout_width="154dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/custom_click_button"
+                android:text="SIMPAN"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/btn_keranjang"
+                android:layout_width="154dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/custom_click_button"
+                android:textColor="@color/white"
+                android:text="KERANJANG"/>
+
 
         </LinearLayout>
 

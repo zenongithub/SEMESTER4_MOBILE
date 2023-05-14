@@ -2,10 +2,9 @@ package com.shedenk.app.ui.beranda;
 
 public class ProdukItemModel {
 
-    String id, nama, harga, deskripsi, ukuran;
-    int gambar;
+    String id, nama, harga, deskripsi, ukuran, gambar;
 
-    public ProdukItemModel(String id, String nama, String harga, String deskripsi, String ukuran, int gambar) {
+    public ProdukItemModel(String id, String nama, String harga, String deskripsi, String ukuran, String gambar) {
         this.nama = nama;
         this.harga = harga;
         this.gambar = gambar;
@@ -22,7 +21,6 @@ public class ProdukItemModel {
         return harga;
     }
 
-
     public String getDeskripsi() {
         return deskripsi;
     }
@@ -31,7 +29,7 @@ public class ProdukItemModel {
         return ukuran;
     }
 
-    public int getGambar() {
+    public String getGambar() {
         return gambar;
     }
 

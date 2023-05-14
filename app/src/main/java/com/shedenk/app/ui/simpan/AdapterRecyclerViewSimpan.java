@@ -22,12 +22,15 @@ public class AdapterRecyclerViewSimpan extends RecyclerView.Adapter<AdapterRecyc
 
         TextView textNama;
         TextView textHarga;
+
+        TextView textUkuran;
         ImageView imageProduk;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textNama = itemView.findViewById(R.id.nama_produk_simpan);
+            textUkuran = itemView.findViewById(R.id.ukuran_simpan_produk);
             textHarga = itemView.findViewById(R.id.harga_produk_simpan);
             imageProduk = itemView.findViewById(R.id.image_produk_simpan);
         }
@@ -49,8 +52,11 @@ public class AdapterRecyclerViewSimpan extends RecyclerView.Adapter<AdapterRecyc
 
         TextView text_nama = holder.textNama;
         TextView text_harga = holder.textHarga;
+        TextView text_ukuran = holder.textUkuran;
         ImageView image_produk = holder.imageProduk;
 
+
+        text_ukuran.setText(dataItem2.get(position).getUkuran());
         text_nama.setText(dataItem2.get(position).getNama());
         text_harga.setText(dataItem2.get(position).getHarga());
         image_produk.setImageResource(dataItem2.get(position).getProduk());

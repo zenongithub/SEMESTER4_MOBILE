@@ -46,6 +46,7 @@
         android:src="@drawable/ic_login" />
 
     <EditText
+        android:id="@+id/TextEmail"
         android:layout_width="354dp"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
@@ -60,6 +61,7 @@
         android:textSize="14sp"/>
 
     <EditText
+        android:id="@+id/TxtPassword"
         android:layout_width="354dp"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"

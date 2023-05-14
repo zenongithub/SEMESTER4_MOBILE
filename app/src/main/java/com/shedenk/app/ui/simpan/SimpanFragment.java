@@ -43,8 +43,9 @@ public class SimpanFragment extends Fragment {
             data2.add(new ProdukItemSimpanModel(
                     ProdukItemSimpan.namaproduksimpan[i],
                     ProdukItemSimpan.hargasimpan[i],
-                    ProdukItemSimpan.produksimpan[i]
-            ));
+                    ProdukItemSimpan.produksimpan[i],
+                    ProdukItemSimpan.ukuransimpan[i]
+                    ));
         }
 
         adapterRecyclerViewSimpan = new AdapterRecyclerViewSimpan(data2);

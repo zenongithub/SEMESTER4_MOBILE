@@ -18,4 +18,9 @@ public class ProdukItemSimpan {
             "Rp. 5.000.000",
             "Rp. 2.500.000"
     };
+
+    static String[] ukuransimpan = {
+            "XL",
+            "L"
+    };
 }
