@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <TextView
         android:id="@+id/txtregister"
@@ -61,7 +61,7 @@
         android:textSize="14sp"/>
 
     <EditText
-        android:id="@+id/TxtPassword"
+        android:id="@+id/TextPassword"
         android:layout_width="354dp"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
