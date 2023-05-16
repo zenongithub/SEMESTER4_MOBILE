@@ -66,19 +66,6 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
     public void onBindViewHolder(@NonNull AdapterRecyclerView.ViewHolder holder, int position) {
 
         ProdukItemModel produkItemModel = dataItem.get(position);
-//        TextView text_id = holder.textId;
-//        TextView text_nama = holder.textNama;
-//        TextView text_deskripsi = holder.textDeskripsi;
-//        TextView text_ukuran = holder.textUkuran;
-//        TextView text_harga = holder.textHarga;
-//        ImageView image_produk = holder.imageProduk;
-//
-////        text_id.setText(dataItem.get(position).getId());
-//        text_nama.setText(dataItem.get(position).getNama());
-//        text_deskripsi.setText(dataItem.get(position).getDeskripsi());
-//        text_ukuran.setText(dataItem.get(position).getUkuran());
-//        text_harga.setText(dataItem.get(position).getHarga());
-//        image_produk.setImageResource(dataItem.get(position).getGambar());
 
         holder.textNama.setText(produkItemModel.getNama());
         holder.textHarga.setText(produkItemModel.getHarga());

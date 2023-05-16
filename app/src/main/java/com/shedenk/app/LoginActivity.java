@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -33,75 +34,25 @@ import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
-
-//    ActivityLoginBinding binding;
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        binding = ActivityLoginBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-//
-//        binding.txtregister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        binding.btnlogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (binding.TextEmail.getText().toString().isEmpty()){
-//                    binding.TextEmail.setError("Masukan Email");
-//                } else if (binding.TextPassword.getText().toString().isEmpty()) {
-//                    binding.TextPassword.setError("Masukan Password");
-//                }else {
-//                    LoginUser(binding);
-//                }
-//            }
-//        });
-//    }
-//
-//    private void LoginUser(ActivityLoginBinding binding) {
-//
-//        StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.86.194:8000/api/login", new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                startActivity(new Intent(LoginActivity.this , HomeActivity.class));
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//                Toast.makeText(LoginActivity.this, "error", Toast.LENGTH_SHORT).show();
-//            }
-//        }){
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String , String> map = new HashMap<>();
-//
-//                map.put("email" , binding.TextEmail.getText().toString());
-//                map.put("password" , binding.TextPassword.getText().toString());
-//
-//                return map;
-//            }
-//        };
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        requestQueue.add(request);
-//    }
-
-
     EditText email, password;
     Button login;
     TextView register;
     ProgressDialog progressDialog;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sharedPreferences = getSharedPreferences("LoginFile", MODE_PRIVATE);
+
+        editor = sharedPreferences.edit();
+        if (sharedPreferences.getString("email", null) != null){
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finishAffinity();
+        }
 
         email = (EditText) findViewById(R.id.TextEmail);
         password = (EditText) findViewById(R.id.TextPassword);
@@ -122,6 +73,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String sEmail = email.getText().toString();
                 String sPassword = password.getText().toString();
+
+                editor.putString("data", sEmail);
+                editor.apply();
 
                 CheckLogin(sEmail, sPassword);
             }
@@ -155,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    Toast.makeText(getApplicationContext(), "Gagal Menemukan Data", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
