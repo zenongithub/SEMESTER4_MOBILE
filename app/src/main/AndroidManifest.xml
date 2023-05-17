@@ -15,7 +15,7 @@
         android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
-            android:name=".ui.beranda.DetailProduk"
+            android:name=".produk.DetailProduk"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

@@ -1,18 +1,27 @@
-package com.shedenk.app.ui.beranda;
+package com.shedenk.app.produk;
 
 public class ProdukItemModel {
 
-    String id, nama, harga, deskripsi, ukuran, gambar;
+    String id;
 
-    public ProdukItemModel(String id, String nama, String harga, String deskripsi, String ukuran, String gambar) {
+    String kategori;
+    String nama;
+    String harga;
+    String deskripsi;
+    String ukuran;
+    String gambar;
+
+    public ProdukItemModel(String id, String nama, String harga, String kategori, String deskripsi, String ukuran, String gambar) {
         this.nama = nama;
         this.harga = harga;
         this.gambar = gambar;
         this.id = id;
         this.deskripsi = deskripsi;
         this.ukuran = ukuran;
+        this.kategori = kategori;
     }
     public String getId() { return id; }
+
     public String getNama() {
         return nama;
     }
@@ -31,6 +40,10 @@ public class ProdukItemModel {
 
     public String getGambar() {
         return gambar;
+    }
+
+    public String getKategori() {
+        return kategori;
     }
 
 

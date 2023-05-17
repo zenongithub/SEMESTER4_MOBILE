@@ -26,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.shedenk.app.databinding.ActivityLoginBinding;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,26 +40,21 @@ public class LoginActivity extends AppCompatActivity {
     TextView register;
     ProgressDialog progressDialog;
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        sharedPreferences = getSharedPreferences("LoginFile", MODE_PRIVATE);
-
-        editor = sharedPreferences.edit();
-        if (sharedPreferences.getString("email", null) != null){
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finishAffinity();
-        }
+        sessionManager = new  SessionManager(this);
 
         email = (EditText) findViewById(R.id.TextEmail);
         password = (EditText) findViewById(R.id.TextPassword);
         login = (Button) findViewById(R.id.btnlogin);
         register = (TextView) findViewById(R.id.txtregister);
         progressDialog = new ProgressDialog(LoginActivity.this);
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,9 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                 String sEmail = email.getText().toString();
                 String sPassword = password.getText().toString();
 
-                editor.putString("data", sEmail);
-                editor.apply();
-
                 CheckLogin(sEmail, sPassword);
             }
         });
@@ -89,13 +82,23 @@ public class LoginActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 String resp = jsonObject.getString("message");
+
                                 if (resp.equals("Sukses")) {
 
-                                    Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
+                                    JSONObject dataLogin = jsonObject.getJSONObject("user");
 
+                                    String shareid = dataLogin.getString("id_akun");
+                                    String sharenama = dataLogin.getString("nama");
+                                    String shareemail = dataLogin.getString("email");
+                                    String sharepassword = dataLogin.getString("password");
+
+                                    sessionManager.createSession(shareid, sharenama, shareemail, sharepassword);
+
+                                    Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);
 
@@ -104,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }, new Response.ErrorListener() {

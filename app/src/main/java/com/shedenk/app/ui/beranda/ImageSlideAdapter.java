@@ -8,16 +8,16 @@ import android.widget.ImageView;
 
 import com.shedenk.app.R;
 
-public class SliderAdapter extends SliderViewAdapter<SliderAdapter.ViewHolder> {
+public class ImageSlideAdapter extends SliderViewAdapter<ImageSlideAdapter.ViewHolder> {
 
     int[] images;
 
-    public SliderAdapter(int[] images){
+    public ImageSlideAdapter(int[] images){
         this.images = images;
     }
 
     @Override
-    public SliderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent) {
+    public ImageSlideAdapter.ViewHolder onCreateViewHolder(ViewGroup parent) {
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.image_slider,parent,false);
