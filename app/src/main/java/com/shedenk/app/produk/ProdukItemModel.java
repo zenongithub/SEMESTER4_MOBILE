@@ -11,6 +11,7 @@ public class ProdukItemModel {
     String ukuran;
     String gambar;
 
+
     public ProdukItemModel(String id, String nama, String harga, String kategori, String deskripsi, String ukuran, String gambar) {
         this.nama = nama;
         this.harga = harga;

@@ -15,6 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="#D57D61"/>
+        <TextView
+            android:id="@+id/id_akun_simpan"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="id_akun"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

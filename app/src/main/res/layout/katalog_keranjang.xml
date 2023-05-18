@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/image_produk_simpan"
+                android:id="@+id/image_produk_keranjang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -34,7 +34,7 @@
                 android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/nama_produk_simpan"
+                    android:id="@+id/nama_produk_keranjang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Baju Gucci"
@@ -42,21 +42,22 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <TextView
-                    android:id="@+id/harga_produk_simpan"
+                    android:id="@+id/harga_produk_keranjang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Rp.5.000.000" />
 
                 <TextView
-                    android:id="@+id/ukuran_produk_simpan"
+                    android:id="@+id/ukuran_produk_keranjang"
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="XL"
                     android:textSize="15sp"/>
+
                 <TextView
-                    android:id="@+id/kategori_produk_simpan"
+                    android:id="@+id/kategori_produk_keranjang"
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,22 +65,28 @@
                     android:textSize="15sp"/>
 
                 <TextView
-                    android:id="@+id/id_produk_simpan"
-                    android:layout_width="0dp"
+                    android:id="@+id/id_produk_keranjang"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:visibility="invisible"/>
                 <TextView
-                    android:id="@+id/deskripsi_produk_simpan"
+                    android:id="@+id/deskripsi_produk_keranjang"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:visibility="invisible"/>
+
+                <TextView
+                    android:id="@+id/idakun_keranjang"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="id_akun"/>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:id="@+id/btn_hapus_simpan"
+                        android:id="@+id/btn_hapus_keranjang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Hapus"

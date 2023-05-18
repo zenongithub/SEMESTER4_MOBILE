@@ -35,7 +35,7 @@ public class BerandaFragment extends Fragment{
     SliderView sliderView;
     int[] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3, R.drawable.slide4,};
     RecyclerView recyclerView;
-    AdapterProduk adapterRecyclerView;
+    AdapterProdukBeranda adapterRecyclerView;
     RecyclerView.LayoutManager layoutManager;
     ArrayList<ProdukItemModel> data;
     private FragmentBerandaBinding binding;
@@ -52,7 +52,7 @@ public class BerandaFragment extends Fragment{
         sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
         sliderView.startAutoCycle();
 
-        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView = view.findViewById(R.id.recycler_view_beranda);
         recyclerView.setHasFixedSize(true);
 
         data = new ArrayList<>();
@@ -73,13 +73,13 @@ public class BerandaFragment extends Fragment{
 
                     for (int i =0; i < jo.length(); i++){
                         object = jo.getJSONObject(i);
-                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama"), object.getString("harga"),(object.getString("id_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"));
+                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"));
                     }
 
                     layoutManager = new GridLayoutManager(getActivity(),2);
                     recyclerView.setLayoutManager(layoutManager);
 
-                    adapterRecyclerView = new AdapterProduk(data);
+                    adapterRecyclerView = new AdapterProdukBeranda(data);
                     recyclerView.setAdapter(adapterRecyclerView);
 
                 } catch (JSONException e) {

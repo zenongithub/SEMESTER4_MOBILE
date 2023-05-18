@@ -52,8 +52,6 @@ public class ProfileFragment extends Fragment {
         email.setText(semail);
         password.setText(spassword);
 
-//        editor = sharedPreferences.edit();
-
         Button btnKeluar = view.findViewById(R.id.btn_keluar);
         btnKeluar.setOnClickListener(new View.OnClickListener() {
             @Override

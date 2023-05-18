@@ -70,6 +70,21 @@
             android:layout_height="wrap_content"
             android:text="XL"
             android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/id_detail_produk"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="id_produk" />
+
+        <TextView
+            android:id="@+id/id_akun_detail_produk"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="id_akun" />
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

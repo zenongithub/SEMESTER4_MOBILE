@@ -1,4 +1,4 @@
-package com.shedenk.app.ui.beranda;
+package com.shedenk.app.ui.keranjang;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,14 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.RequestOptions;
 import com.shedenk.app.R;
+import com.shedenk.app.SessionManager;
 import com.shedenk.app.produk.DetailProduk;
 import com.shedenk.app.produk.ProdukItemModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.ViewHolder> {
+public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKeranjang.ViewHolder> {
 
     private
     ArrayList<ProdukItemModel> dataItem;
@@ -28,7 +31,8 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-//        TextView textId;
+        TextView textIdakun;
+        TextView textId;
         TextView textNama;
         TextView textHarga;
         TextView textDeskripsi;
@@ -41,34 +45,41 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textNama = itemView.findViewById(R.id.nama_produk);
-            textHarga = itemView.findViewById(R.id.harga_produk);
-            textKategori = itemView.findViewById(R.id.kategori_produk);
-            textDeskripsi = itemView.findViewById(R.id.deskripsi_produk);
-            textUkuran = itemView.findViewById(R.id.ukuran_produk);
-            imageProduk = itemView.findViewById(R.id.image_produk);
+            textIdakun = itemView.findViewById(R.id.idakun_keranjang);
+            textId = itemView.findViewById(R.id.id_produk_keranjang);
+            textNama = itemView.findViewById(R.id.nama_produk_keranjang);
+            textHarga = itemView.findViewById(R.id.harga_produk_keranjang);
+            textKategori = itemView.findViewById(R.id.kategori_produk_keranjang);
+            textDeskripsi = itemView.findViewById(R.id.deskripsi_produk_keranjang);
+            textUkuran = itemView.findViewById(R.id.ukuran_produk_keranjang);
+            imageProduk = itemView.findViewById(R.id.image_produk_keranjang);
+
         }
     }
 
-    AdapterProduk(ArrayList<ProdukItemModel> data){
+    AdapterProdukKeranjang(ArrayList<ProdukItemModel> data){
         this.dataItem = data;
     }
 
     @NonNull
     @Override
-    public AdapterProduk.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterProdukKeranjang.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+
+
 
         context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.katalog_produk,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.katalog_keranjang,parent,false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterProduk.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterProdukKeranjang.ViewHolder holder, int position) {
 
         ProdukItemModel produkItemModel = dataItem.get(position);
 
+        holder.textId.setText(produkItemModel.getId());
         holder.textNama.setText(produkItemModel.getNama());
         holder.textHarga.setText("Rp. " +produkItemModel.getHarga());
         holder.textKategori.setText("Kategori : " +produkItemModel.getKategori());
@@ -79,6 +90,8 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), DetailProduk.class);
+
+                intent.putExtra("id", produkItemModel.getId());
                 intent.putExtra("nama", produkItemModel.getNama());
                 intent.putExtra("harga", produkItemModel.getHarga());
                 intent.putExtra("kategori", produkItemModel.getKategori());
