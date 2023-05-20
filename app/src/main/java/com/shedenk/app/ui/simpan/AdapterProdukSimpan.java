@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.shedenk.app.R;
+import com.shedenk.app.SessionManager;
 import com.shedenk.app.produk.DetailProduk;
+import com.shedenk.app.produk.DetailProdukSimpan;
 import com.shedenk.app.produk.ProdukItemModel;
 
 import java.util.ArrayList;
@@ -80,7 +82,7 @@ public class AdapterProdukSimpan extends RecyclerView.Adapter<AdapterProdukSimpa
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DetailProduk.class);
+                Intent intent = new Intent(view.getContext(), DetailProdukSimpan.class);
 
                 intent.putExtra("id", produkItemModel.getId());
                 intent.putExtra("nama", produkItemModel.getNama());
@@ -89,6 +91,7 @@ public class AdapterProdukSimpan extends RecyclerView.Adapter<AdapterProdukSimpa
                 intent.putExtra("deskripsi", produkItemModel.getDeskripsi());
                 intent.putExtra("ukuran", produkItemModel.getUkuran());
                 intent.putExtra("gambar", produkItemModel.getGambar());
+
                 view.getContext().startActivity(intent);
             }
         });

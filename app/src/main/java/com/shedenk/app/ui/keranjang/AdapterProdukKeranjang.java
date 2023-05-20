@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.shedenk.app.R;
 import com.shedenk.app.SessionManager;
 import com.shedenk.app.produk.DetailProduk;
+import com.shedenk.app.produk.DetailProdukKeranjang;
 import com.shedenk.app.produk.ProdukItemModel;
 
 import java.util.ArrayList;
@@ -26,8 +27,9 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
 
     private
     ArrayList<ProdukItemModel> dataItem;
-
     private Context context;
+
+//    SessionManager sessionManager;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -41,9 +43,11 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
         ImageView imageProduk;
 
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+//            sessionManager = new SessionManager(itemView);
+//            sessionManager.checkLogin();
 
             textIdakun = itemView.findViewById(R.id.idakun_keranjang);
             textId = itemView.findViewById(R.id.id_produk_keranjang);
@@ -53,6 +57,11 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
             textDeskripsi = itemView.findViewById(R.id.deskripsi_produk_keranjang);
             textUkuran = itemView.findViewById(R.id.ukuran_produk_keranjang);
             imageProduk = itemView.findViewById(R.id.image_produk_keranjang);
+
+//            HashMap<String,String> user = sessionManager.getUserDetail();
+//            String sid = user.get(sessionManager.ID);
+//
+//            textIdakun.setText(sid);
 
         }
     }
@@ -64,7 +73,6 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
     @NonNull
     @Override
     public AdapterProdukKeranjang.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
 
 
 
@@ -89,7 +97,7 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DetailProduk.class);
+                Intent intent = new Intent(view.getContext(), DetailProdukKeranjang.class);
 
                 intent.putExtra("id", produkItemModel.getId());
                 intent.putExtra("nama", produkItemModel.getNama());

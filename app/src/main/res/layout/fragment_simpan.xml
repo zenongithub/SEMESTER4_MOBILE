@@ -14,7 +14,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:background="#D57D61"/>
+            android:background="#EA734D"/>
         <TextView
             android:id="@+id/id_akun_simpan"
             android:layout_width="0dp"

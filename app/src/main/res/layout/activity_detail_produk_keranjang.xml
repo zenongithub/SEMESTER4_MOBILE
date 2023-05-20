@@ -12,13 +12,13 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/image_detail_produk"
+            android:id="@+id/image_detail_produkkeranjang"
             android:layout_width="450dp"
             android:layout_height="450dp"
             android:background="@drawable/p1"/>
 
         <TextView
-            android:id="@+id/harga_detail_produk"
+            android:id="@+id/harga_detail_produkkeranjang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rp. 5.000.000"
@@ -29,7 +29,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
 
         <TextView
-            android:id="@+id/nama_detail_produk"
+            android:id="@+id/nama_detail_produkkeranjang"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
             android:textStyle="italic"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
         <TextView
-            android:id="@+id/kategori_detail_produk"
+            android:id="@+id/kategori_detail_produkkeranjang"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:text="Deskripsi :"
             android:textSize="15sp"/>
         <TextView
-            android:id="@+id/deskripsi_detail_produk"
+            android:id="@+id/deskripsi_detail_produkkeranjang"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
             android:textSize="15sp"/>
 
         <TextView
-            android:id="@+id/ukuran_detail_produk"
+            android:id="@+id/ukuran_detail_produkkeranjang"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
@@ -72,7 +72,7 @@
             android:textSize="15sp"/>
 
         <TextView
-            android:id="@+id/id_detail_produk"
+            android:id="@+id/id_detail_produkkeranjang"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:layout_width="0dp"
@@ -81,7 +81,7 @@
             android:text="id_produk" />
 
         <TextView
-            android:id="@+id/id_akun_detail_produk"
+            android:id="@+id/id_akun_detail_produkkeranjang"
             android:layout_marginLeft="20dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -99,33 +99,29 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_gravity="center">
 
             <Button
-                android:id="@+id/btn_simpan"
-                android:layout_width="154dp"
+                android:id="@+id/btn_hapus_keranjang"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="150dp"
                 android:layout_marginLeft="25dp"
-                android:background="@drawable/custom_click_button"
-                android:text="+ SIMPAN"
-                android:textColor="@color/white"/>
-
-            <Button
-                android:id="@+id/btn_keranjang"
-                android:layout_width="154dp"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginEnd="131dp"
                 android:background="@drawable/custom_click_button"
+                android:drawableStart="@drawable/baseline_delete_24"
+                android:text="HAPUS KERANJANG"
                 android:textColor="@color/white"
-                android:text="+ KERANJANG"/>
+                android:textSize="10sp" />
 
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

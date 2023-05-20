@@ -36,7 +36,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:background="#D57D61">
+            android:background="#EA734D">
         </com.google.android.material.appbar.MaterialToolbar>
 
         <RelativeLayout

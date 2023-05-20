@@ -8,10 +8,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="204dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="5dp"
+        android:layout_margin="3dp"
         app:cardElevation="3dp">
 
         <LinearLayout
@@ -58,15 +57,15 @@
 
                 <TextView
                     android:id="@+id/kategori_produk_keranjang"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:text="Baju"
+                    android:visibility="invisible"
                     android:textSize="15sp"/>
 
                 <TextView
                     android:id="@+id/id_produk_keranjang"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:visibility="invisible"/>
                 <TextView
@@ -79,22 +78,8 @@
                     android:id="@+id/idakun_keranjang"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:visibility="invisible"
                     android:text="id_akun"/>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <Button
-                        android:id="@+id/btn_hapus_keranjang"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hapus"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/custom_button"
-                        android:textColor="@color/white"/>
-
-                </RelativeLayout>
 
             </LinearLayout>
 
