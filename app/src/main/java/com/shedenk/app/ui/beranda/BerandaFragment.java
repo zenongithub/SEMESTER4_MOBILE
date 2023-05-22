@@ -1,5 +1,6 @@
 package com.shedenk.app.ui.beranda;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,7 +19,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.shedenk.app.R;
+import com.shedenk.app.RecyclerViewListener;
 import com.shedenk.app.databinding.FragmentBerandaBinding;
+import com.shedenk.app.produk.DetailProduk;
 import com.shedenk.app.produk.ProdukItemModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -30,7 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class BerandaFragment extends Fragment{
+public class BerandaFragment extends Fragment implements RecyclerViewListener {
 
     SliderView sliderView;
     int[] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3, R.drawable.slide4,};
@@ -73,13 +76,13 @@ public class BerandaFragment extends Fragment{
 
                     for (int i =0; i < jo.length(); i++){
                         object = jo.getJSONObject(i);
-                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"));
+                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",""));
                     }
 
                     layoutManager = new GridLayoutManager(getActivity(),2);
                     recyclerView.setLayoutManager(layoutManager);
 
-                    adapterRecyclerView = new AdapterProdukBeranda(data);
+                    adapterRecyclerView = new AdapterProdukBeranda(data, BerandaFragment.this);
                     recyclerView.setAdapter(adapterRecyclerView);
 
                 } catch (JSONException e) {
@@ -103,4 +106,22 @@ public class BerandaFragment extends Fragment{
         binding = null;
     }
 
+    @Override
+    public void onClickItem(View view, int position) {
+        Intent intent = new Intent(view.getContext(), DetailProduk.class);
+
+        intent.putExtra("id", data.get(position).getId());
+        intent.putExtra("nama", data.get(position).getNama());
+        intent.putExtra("harga", data.get(position).getHarga());
+        intent.putExtra("kategori", data.get(position).getKategori());
+        intent.putExtra("deskripsi", data.get(position).getDeskripsi());
+        intent.putExtra("ukuran", data.get(position).getUkuran());
+        intent.putExtra("gambar", data.get(position).getGambar());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClickHapusSimpan(View view, int position) {
+
+    }
 }

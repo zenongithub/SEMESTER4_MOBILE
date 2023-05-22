@@ -36,6 +36,12 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
+    public SessionManager(Context context) {
+        this.context = context;
+        sharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        editor = sharedPreferences.edit();
+    }
+
     public void createSession(String id, String nama, String email, String password){
 
         editor.putBoolean(LOGIN, true);

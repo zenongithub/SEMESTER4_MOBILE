@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.shedenk.app.HomeActivity;
 import com.shedenk.app.LoginActivity;
 import com.shedenk.app.R;
 import com.shedenk.app.RegisterActivity;
@@ -103,7 +104,8 @@ public class DetailProdukKeranjang extends AppCompatActivity {
                                 if (resp.equals("Berhasil Menghapus")) {
                                     Toast.makeText(getApplicationContext(), "Berhasil Menghapus", Toast.LENGTH_SHORT).show();
 
-
+//                                    Intent intent = new Intent(DetailProdukKeranjang.this, FragmentKeranjangBinding.class);
+//                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Gagal Menghapus", Toast.LENGTH_SHORT).show();
                                 }

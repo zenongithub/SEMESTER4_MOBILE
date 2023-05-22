@@ -122,7 +122,6 @@ public class DetailProdukSimpan extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-//                    progressDialog.cancel();
                 }
             }, 2000);
         } else {

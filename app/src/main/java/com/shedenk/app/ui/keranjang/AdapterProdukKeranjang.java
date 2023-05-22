@@ -1,7 +1,6 @@
 package com.shedenk.app.ui.keranjang;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,26 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.RequestOptions;
 import com.shedenk.app.R;
-import com.shedenk.app.SessionManager;
-import com.shedenk.app.produk.DetailProduk;
-import com.shedenk.app.produk.DetailProdukKeranjang;
+import com.shedenk.app.RecyclerViewListener;
 import com.shedenk.app.produk.ProdukItemModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKeranjang.ViewHolder> {
 
     private
     ArrayList<ProdukItemModel> dataItem;
+    RecyclerViewListener recyclerVIewListener;
     private Context context;
 
-//    SessionManager sessionManager;
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView textIdakun;
         TextView textId;
@@ -46,9 +40,6 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-//            sessionManager = new SessionManager(itemView);
-//            sessionManager.checkLogin();
-
             textIdakun = itemView.findViewById(R.id.idakun_keranjang);
             textId = itemView.findViewById(R.id.id_produk_keranjang);
             textNama = itemView.findViewById(R.id.nama_produk_keranjang);
@@ -57,16 +48,18 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
             textDeskripsi = itemView.findViewById(R.id.deskripsi_produk_keranjang);
             textUkuran = itemView.findViewById(R.id.ukuran_produk_keranjang);
             imageProduk = itemView.findViewById(R.id.image_produk_keranjang);
+            itemView.setOnClickListener(this);
 
-//            HashMap<String,String> user = sessionManager.getUserDetail();
-//            String sid = user.get(sessionManager.ID);
-//
-//            textIdakun.setText(sid);
+        }
 
+        @Override
+        public void onClick(View view) {
+            recyclerVIewListener.onClickItem(view, getAdapterPosition());
         }
     }
 
-    AdapterProdukKeranjang(ArrayList<ProdukItemModel> data){
+    AdapterProdukKeranjang(ArrayList<ProdukItemModel> data, RecyclerViewListener listener){
+        this.recyclerVIewListener = listener;
         this.dataItem = data;
     }
 
@@ -94,21 +87,21 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
         holder.textDeskripsi.setText(produkItemModel.getDeskripsi());
         holder.textUkuran.setText("Ukuran : "+produkItemModel.getUkuran());
         Glide.with(context).load(produkItemModel.getGambar()).apply(new RequestOptions().centerCrop()).into(holder.imageProduk);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DetailProdukKeranjang.class);
-
-                intent.putExtra("id", produkItemModel.getId());
-                intent.putExtra("nama", produkItemModel.getNama());
-                intent.putExtra("harga", produkItemModel.getHarga());
-                intent.putExtra("kategori", produkItemModel.getKategori());
-                intent.putExtra("deskripsi", produkItemModel.getDeskripsi());
-                intent.putExtra("ukuran", produkItemModel.getUkuran());
-                intent.putExtra("gambar", produkItemModel.getGambar());
-                view.getContext().startActivity(intent);
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), DetailProdukKeranjang.class);
+//
+//                intent.putExtra("id", produkItemModel.getId());
+//                intent.putExtra("nama", produkItemModel.getNama());
+//                intent.putExtra("harga", produkItemModel.getHarga());
+//                intent.putExtra("kategori", produkItemModel.getKategori());
+//                intent.putExtra("deskripsi", produkItemModel.getDeskripsi());
+//                intent.putExtra("ukuran", produkItemModel.getUkuran());
+//                intent.putExtra("gambar", produkItemModel.getGambar());
+//                view.getContext().startActivity(intent);
+//            }
+//        });
 
     }
 

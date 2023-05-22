@@ -1,7 +1,6 @@
 package com.shedenk.app.ui.beranda;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.shedenk.app.R;
-import com.shedenk.app.produk.DetailProduk;
+import com.shedenk.app.RecyclerViewListener;
 import com.shedenk.app.produk.ProdukItemModel;
 
 import java.util.ArrayList;
@@ -23,10 +22,11 @@ public class AdapterProdukBeranda extends RecyclerView.Adapter<AdapterProdukBera
 
     private
     ArrayList<ProdukItemModel> dataItem;
+    RecyclerViewListener recyclerVIewListener;
 
     private Context context;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textId;
         TextView textNama;
@@ -48,10 +48,16 @@ public class AdapterProdukBeranda extends RecyclerView.Adapter<AdapterProdukBera
             textDeskripsi = itemView.findViewById(R.id.deskripsi_produk);
             textUkuran = itemView.findViewById(R.id.ukuran_produk);
             imageProduk = itemView.findViewById(R.id.image_produk);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            recyclerVIewListener.onClickItem(view, getAdapterPosition());       }
     }
 
-    AdapterProdukBeranda(ArrayList<ProdukItemModel> data){
+    AdapterProdukBeranda(ArrayList<ProdukItemModel> data, RecyclerViewListener listener){
+        this.recyclerVIewListener = listener;
         this.dataItem = data;
     }
 
@@ -77,21 +83,6 @@ public class AdapterProdukBeranda extends RecyclerView.Adapter<AdapterProdukBera
         holder.textDeskripsi.setText(produkItemModel.getDeskripsi());
         holder.textUkuran.setText("Ukuran : "+produkItemModel.getUkuran());
         Glide.with(context).load(produkItemModel.getGambar()).apply(new RequestOptions().centerCrop()).into(holder.imageProduk);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DetailProduk.class);
-
-                intent.putExtra("id", produkItemModel.getId());
-                intent.putExtra("nama", produkItemModel.getNama());
-                intent.putExtra("harga", produkItemModel.getHarga());
-                intent.putExtra("kategori", produkItemModel.getKategori());
-                intent.putExtra("deskripsi", produkItemModel.getDeskripsi());
-                intent.putExtra("ukuran", produkItemModel.getUkuran());
-                intent.putExtra("gambar", produkItemModel.getGambar());
-                view.getContext().startActivity(intent);
-            }
-        });
 
     }
 
