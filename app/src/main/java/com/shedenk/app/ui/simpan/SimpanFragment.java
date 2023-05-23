@@ -1,9 +1,13 @@
 package com.shedenk.app.ui.simpan;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,29 +51,16 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
     AdapterProdukSimpan adapterProdukSimpan;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+
+    private Context context;
     ArrayList<ProdukItemModel> data;
     private FragmentSimpanBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_simpan,container,false);
-
-
-        sessionManager = new SessionManager(getActivity());
-        sessionManager.checkLogin();
-
-        id_akun = view.findViewById(R.id.id_akun_simpan);
-
-        HashMap<String,String> user = sessionManager.getUserDetail();
-        String sid = user.get(sessionManager.ID);
-        id_akun.setText(sid);
-
-        recyclerView = view.findViewById(R.id.recycler_view_simpan);
-        recyclerView.setHasFixedSize(true);
+    private void loadData(Context context, String sid){
 
         data = new ArrayList<>();
 
-        RequestQueue queue = Volley.newRequestQueue(container.getContext());
+        RequestQueue queue = Volley.newRequestQueue(context);
 
 
         StringRequest stringRequest = new StringRequest(
@@ -78,7 +69,7 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(container.getContext(), "Berhasil Mengambil Data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Berhasil Mengambil Data", Toast.LENGTH_SHORT).show();
                     JSONArray jo = new JSONArray(response);
                     JSONObject object;
 
@@ -94,6 +85,8 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
                     adapterProdukSimpan = new AdapterProdukSimpan(data, SimpanFragment.this);
                     recyclerView.setAdapter(adapterProdukSimpan);
 
+                    queue.getCache().clear();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -101,7 +94,7 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(container.getContext(), "Gagal Mengambil Data" + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Gagal Mengambil Data" + error, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -112,6 +105,26 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
             }
         };
         queue.add(stringRequest);
+    }
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_simpan,container,false);
+
+        context = container.getContext();
+        sessionManager = new SessionManager(getActivity());
+        sessionManager.checkLogin();
+
+        id_akun = view.findViewById(R.id.id_akun_simpan);
+
+        HashMap<String,String> user = sessionManager.getUserDetail();
+        String sid = user.get(sessionManager.ID);
+        id_akun.setText(sid);
+
+        loadData(container.getContext(), sid);
+
+        recyclerView = view.findViewById(R.id.recycler_view_simpan);
+        recyclerView.setHasFixedSize(true);
 
         return view;
     }
@@ -134,7 +147,7 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
                 intent.putExtra("ukuran", data.get(position).getUkuran());
                 intent.putExtra("gambar", data.get(position).getGambar());
 
-                view.getContext().startActivity(intent);
+                startActivityForResult(intent, 1);
     }
 
     @Override
@@ -143,10 +156,14 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
                 String hid_akun = data.get(position).getId_akun();
 
                 HapusSimpan(hid_produk, hid_akun);
+                HashMap<String, String> user = sessionManager.getUserDetail();
+                String sid = user.get(sessionManager.ID);
+                loadData(context, sid);
     }
 
     private void HapusSimpan(String hid_produk, String hid_akun) {
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        RequestQueue queue = Volley.newRequestQueue(context);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.86.194:8000/api/hapussimpan",
                 new Response.Listener<String>() {
@@ -182,5 +199,4 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
         };
         queue.add(stringRequest);
     }
-
 }

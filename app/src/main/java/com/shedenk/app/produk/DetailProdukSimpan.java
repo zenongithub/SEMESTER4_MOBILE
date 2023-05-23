@@ -80,6 +80,7 @@ public class DetailProdukSimpan extends AppCompatActivity {
                     String Kid_produk = id_produksimpan.getText().toString();
 
                     TambahKeranjang(Kid_akun, Kid_produk );
+                    finish();
                 }
             });
     }

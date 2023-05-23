@@ -1,5 +1,6 @@
 package com.shedenk.app.ui.transaksi;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,10 +25,9 @@ import com.shedenk.app.R;
 import com.shedenk.app.RecyclerViewListener;
 import com.shedenk.app.SessionManager;
 import com.shedenk.app.databinding.FragmentTransaksiBinding;
-import com.shedenk.app.produk.ProdukItemModel;
-import com.shedenk.app.transaksi.TransaksiModel;
-import com.shedenk.app.ui.keranjang.AdapterProdukKeranjang;
-import com.shedenk.app.ui.keranjang.KeranjangFragment;
+import com.shedenk.app.produk.DetailProduk;
+import com.shedenk.app.transaksiactivity.DetailTransaksi;
+import com.shedenk.app.transaksiactivity.TransaksiModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +82,7 @@ public class TransaksiFragment extends Fragment implements RecyclerViewListener 
                     for (int i =0; i < jo.length(); i++){
 
                         object = jo.getJSONObject(i);
-                        data.add(new TransaksiModel("", object.getString("id_transaksi"), object.getString("tgl_transaksi"), object.getString("total_harga"),object.getString("jumlah_produk"),object.getString("status_transaksi") ));
+                        data.add(new TransaksiModel("", object.getString("id_transaksi"), object.getString("tgl_transaksi"), object.getString("jumlah_produk"),object.getString("total_harga"),object.getString("status_transaksi") ));
 
                     }
 
@@ -122,7 +122,14 @@ public class TransaksiFragment extends Fragment implements RecyclerViewListener 
 
     @Override
     public void onClickItem(View view, int position) {
+        Intent intent = new Intent(view.getContext(), DetailTransaksi.class);
 
+        intent.putExtra("id_transaksi", data.get(position).getId_transaksi());
+        intent.putExtra("tgl_transaksi", data.get(position).getTanggal());
+        intent.putExtra("total_hargatransaksi", data.get(position).getTotal_harga());
+        intent.putExtra("jumlah_produk", data.get(position).getTotal_produk());
+        intent.putExtra("status_transaksi", data.get(position).getStatus_transaksi());
+        startActivity(intent);
     }
 
     @Override

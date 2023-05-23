@@ -88,6 +88,9 @@ public class DetailProdukKeranjang extends AppCompatActivity {
                 String hid_produk = id_produkkeranjang.getText().toString();
 
                 HapusKeranjang(hid_akun, hid_produk );
+                Intent inten = new Intent();
+                setResult(RESULT_OK, inten);
+                finish();
             }
         });
     }

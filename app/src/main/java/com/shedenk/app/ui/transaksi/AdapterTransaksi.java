@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shedenk.app.R;
 import com.shedenk.app.RecyclerViewListener;
-import com.shedenk.app.transaksi.TransaksiModel;
+import com.shedenk.app.transaksiactivity.TransaksiModel;
 
 import java.util.ArrayList;
 
@@ -70,7 +70,7 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.View
         holder.textid.setText("No Transaksi :  "+transaksiModel.getId_transaksi());
         holder.textTgl.setText("Tanggal Transaksi : " +transaksiModel.getTanggal());
         holder.textTotal_barang.setText("Total produk : " +transaksiModel.getTotal_produk());
-        holder.textTotal_harga.setText("Total Harga : " +transaksiModel.getTotal_harga());
+        holder.textTotal_harga.setText("Total Harga : " +"Rp. "+transaksiModel.getTotal_harga());
         holder.status_transaksi.setText("Status : " +transaksiModel.getStatus_transaksi());
     }
 

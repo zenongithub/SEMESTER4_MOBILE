@@ -112,6 +112,7 @@ public class DetailProduk extends AppCompatActivity {
                                 String resp = jsonObject.getString("success");
                                 if (resp.equals("Berhasil Menambahkan")) {
                                     Toast.makeText(getApplicationContext(), "Berhasil Menambahkan Simpan", Toast.LENGTH_SHORT).show();
+                                    finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Gagal Menambahkan Simpan", Toast.LENGTH_SHORT).show();
                                 }
@@ -159,6 +160,7 @@ public class DetailProduk extends AppCompatActivity {
                                 String resp = jsonObject.getString("success");
                                 if (resp.equals("Berhasil Menambahkan")) {
                                     Toast.makeText(getApplicationContext(), "Berhasil Menambahkan Keranjang", Toast.LENGTH_SHORT).show();
+                                    finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Gagal Menambahkan Keranjang", Toast.LENGTH_SHORT).show();
                                 }
