@@ -2,6 +2,7 @@ package com.shedenk.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -39,11 +40,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        nama = (EditText) findViewById(R.id.register_nama);
-        email = (EditText) findViewById(R.id.register_email);
-        password = (EditText) findViewById(R.id.register_password);
-        register = (Button) findViewById(R.id.btn_registers);
-        login = (TextView) findViewById(R.id.txtlogin);
+        nama =  findViewById(R.id.register_nama);
+        email = findViewById(R.id.register_email);
+        password = findViewById(R.id.register_password);
+        register = findViewById(R.id.btn_registers);
+        login = findViewById(R.id.txtlogin);
         progressDialog = new ProgressDialog(RegisterActivity.this);
 
         login.setOnClickListener(new View.OnClickListener() {

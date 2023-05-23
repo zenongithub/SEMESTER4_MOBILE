@@ -7,10 +7,13 @@
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="408dp"
+        android:layout_height="88dp"
         android:layout_gravity="center"
-        android:layout_margin="3dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="3dp"
         app:cardElevation="3dp">
 
         <LinearLayout
@@ -18,7 +21,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/image_produk_keranjang"
+                android:id="@+id/image_produk_detailtransaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -28,51 +31,52 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/image_produk_keranjang"
+                android:layout_below="@+id/image_produk_detailtransaksi"
                 android:orientation="vertical"
                 android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/nama_produk_keranjang"
+                    android:id="@+id/nama_produk_detailtransaksi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Baju Gucci"
-                    android:textStyle="italic"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textStyle="italic" />
 
                 <TextView
-                    android:id="@+id/harga_produk_keranjang"
+                    android:id="@+id/harga_produk_detailtransaksi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Rp.5.000.000" />
 
                 <TextView
-                    android:id="@+id/ukuran_produk_keranjang"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/ukuran_produk_detailtransaksi"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:text="XL"
-                    android:textSize="15sp"/>
+                    android:visibility="invisible"
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/kategori_produk_keranjang"
+                    android:id="@+id/kategori_produk_detailtransaksi"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:text="Baju"
-                    android:visibility="invisible"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:visibility="invisible" />
 
                 <TextView
-                    android:id="@+id/id_produk_keranjang"
+                    android:id="@+id/id_produk_detailtransaksi"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
+
                 <TextView
-                    android:id="@+id/deskripsi_produk_keranjang"
+                    android:id="@+id/deskripsi_produk_detailtransaksi"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
             </LinearLayout>
 

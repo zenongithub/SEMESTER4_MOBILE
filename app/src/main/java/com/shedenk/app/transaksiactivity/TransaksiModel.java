@@ -1,4 +1,4 @@
-package com.shedenk.app.transaksi;
+package com.shedenk.app.transaksiactivity;
 
 public class TransaksiModel {
 

@@ -1,6 +1,9 @@
 package com.shedenk.app.ui.keranjang;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -68,14 +71,68 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
     AdapterProdukKeranjang adapterProdukKeranjang;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private Context context;
     ArrayList<ProdukItemModel> data;
     int total = 0;
     private FragmentKeranjangBinding binding;
 
+    private void loadData(Context context, String id){
+        data = new ArrayList<>();
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+
+        StringRequest stringRequest = new StringRequest(
+
+                Request.Method.POST, "http://192.168.86.194:8000/api/datakeranjang", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Toast.makeText(context, "Berhasil Mengambil Data", Toast.LENGTH_SHORT).show();
+                    JSONArray jo = new JSONArray(response);
+                    JSONObject object;
+
+                    for (int i =0; i < jo.length(); i++){
+
+                        object = jo.getJSONObject(i);
+                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",""));
+
+                        total += Integer.valueOf(object.getString("harga"));
+
+                    }
+                    total_barang.setText(String.valueOf(data.size()));
+                    total_harga.setText(String.valueOf(total));
+
+                    layoutManager = new GridLayoutManager(getActivity(),1);
+                    recyclerView.setLayoutManager(layoutManager);
+
+                    adapterProdukKeranjang = new AdapterProdukKeranjang(data, KeranjangFragment.this);
+                    recyclerView.setAdapter(adapterProdukKeranjang);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Gagal Mengambil Data" + error, Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("id_akun", id);
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_keranjang, container, false);
-
+        context = container.getContext();
         sessionManager = new SessionManager(getActivity());
         sessionManager.checkLogin();
 
@@ -98,57 +155,7 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
         recyclerView = view.findViewById(R.id.recycler_view_keranjang);
         recyclerView.setHasFixedSize(true);
 
-        data = new ArrayList<>();
-
-        RequestQueue queue = Volley.newRequestQueue(container.getContext());
-
-
-        StringRequest stringRequest = new StringRequest(
-
-                Request.Method.POST, "http://192.168.86.194:8000/api/datakeranjang", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Toast.makeText(container.getContext(), "Berhasil Mengambil Data", Toast.LENGTH_SHORT).show();
-                    JSONArray jo = new JSONArray(response);
-                    JSONObject object;
-
-                    for (int i =0; i < jo.length(); i++){
-
-                        object = jo.getJSONObject(i);
-                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",""));
-
-                        total += Integer.valueOf(object.getString("harga"));
-
-
-                    }
-                        total_barang.setText(String.valueOf(data.size()));
-                        total_harga.setText(String.valueOf(total));
-
-                    layoutManager = new GridLayoutManager(getActivity(),1);
-                    recyclerView.setLayoutManager(layoutManager);
-
-                    adapterProdukKeranjang = new AdapterProdukKeranjang(data, KeranjangFragment.this);
-                    recyclerView.setAdapter(adapterProdukKeranjang);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(container.getContext(), "Gagal Mengambil Data" + error, Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("id_akun", sid);
-                return params;
-            }
-        };
-        queue.add(stringRequest);
+        loadData(container.getContext(), sid);
 
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.slide2);
         scaleBitmap = Bitmap.createScaledBitmap(bitmap, 1200, 518, false);
@@ -254,12 +261,6 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-    }
-
-    @Override
     public void onClickItem(View view, int position) {
                 Intent intent = new Intent(view.getContext(), DetailProdukKeranjang.class);
 
@@ -270,11 +271,23 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
                 intent.putExtra("deskripsi", data.get(position).getDeskripsi());
                 intent.putExtra("ukuran", data.get(position).getUkuran());
                 intent.putExtra("gambar", data.get(position).getGambar());
-                view.getContext().startActivity(intent);
+                startActivityForResult(intent, 1);
             }
 
     @Override
     public void onClickHapusSimpan(View view, int position) {
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                HashMap<String,String> user = sessionManager.getUserDetail();
+                String sid = user.get(sessionManager.ID);
+                loadData(context, sid);
+            }
+        }
     }
 }

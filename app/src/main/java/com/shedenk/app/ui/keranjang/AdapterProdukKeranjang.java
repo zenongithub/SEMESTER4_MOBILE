@@ -27,7 +27,6 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView textIdakun;
         TextView textId;
         TextView textNama;
         TextView textHarga;
@@ -40,7 +39,6 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textIdakun = itemView.findViewById(R.id.idakun_keranjang);
             textId = itemView.findViewById(R.id.id_produk_keranjang);
             textNama = itemView.findViewById(R.id.nama_produk_keranjang);
             textHarga = itemView.findViewById(R.id.harga_produk_keranjang);

@@ -28,7 +28,7 @@ public class AdapterProdukSimpan extends RecyclerView.Adapter<AdapterProdukSimpa
     RecyclerViewListener recyclerVIewListener;
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView textId;
         TextView textNama;
@@ -51,15 +51,20 @@ public class AdapterProdukSimpan extends RecyclerView.Adapter<AdapterProdukSimpa
             textUkuran = itemView.findViewById(R.id.ukuran_produk_simpan);
             imageProduk = itemView.findViewById(R.id.image_produk_simpan);
             btn_hapussimpan = itemView.findViewById(R.id.btn_hapus_simpan);
-            itemView.setOnClickListener(this);
-            btn_hapussimpan.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    recyclerVIewListener.onClickItem(view, getAdapterPosition());
+                }
+            });
+            btn_hapussimpan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    recyclerVIewListener.onClickHapusSimpan(btn_hapussimpan, getAdapterPosition());
+                }
+            });
         }
 
-        @Override
-        public void onClick(View view) {
-            recyclerVIewListener.onClickItem(view, getAdapterPosition());
-            recyclerVIewListener.onClickHapusSimpan(view, getAdapterPosition());
-        }
     }
 
     AdapterProdukSimpan(ArrayList<ProdukItemModel> data, RecyclerViewListener listener){
