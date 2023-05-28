@@ -6,8 +6,8 @@
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="408dp"
-        android:layout_height="165dp"
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
         android:layout_gravity="center"
         android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
@@ -39,14 +39,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Tanggal transaksi :"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic" />
 
-                <TextView
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="-------------------------------------------------------------------------------------------"
-                    android:textSize="15sp" />
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/Jumlah_Produktransaksi"
@@ -54,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:text="Jumlah produk :"
                     android:textSize="15sp"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/Total_Hargatransaksi"
@@ -63,24 +64,25 @@
                     android:layout_marginTop="5dp"
                     android:text="Total Harga :"
                     android:textSize="15sp"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic" />
 
-                <TextView
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="-------------------------------------------------------------------------------------------"
-                    android:textSize="15sp" />
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/status_transaksi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:gravity="end"
                     android:text="Status :           "
                     android:textSize="15sp"
-                    android:textStyle="italic"
-                    android:gravity="end"/>
+                    android:textStyle="italic" />
 
 
             </LinearLayout>

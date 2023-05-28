@@ -64,7 +64,7 @@ public class DetailProduk extends AppCompatActivity {
         harga = findViewById(R.id.harga_detail_produk);
         kategori = findViewById(R.id.kategori_detail_produk);
         deskripsi = findViewById(R.id.deskripsi_detail_produk);
-        ukuran = findViewById(R.id.ukuran_detail_produk);
+//        ukuran = findViewById(R.id.ukuran_detail_produk);
         gambar = findViewById(R.id.image_detail_produk);
 
         id_produk.setText(getIntent().getExtras().getString("id"));
@@ -72,7 +72,7 @@ public class DetailProduk extends AppCompatActivity {
         harga.setText("Rp. "+getIntent().getExtras().getString("harga"));
         kategori.setText("Kategori : " +getIntent().getExtras().getString("kategori"));
         deskripsi.setText(getIntent().getExtras().getString("deskripsi"));
-        ukuran.setText("Ukuran : "+getIntent().getExtras().getString("ukuran"));
+//        ukuran.setText("Ukuran : "+getIntent().getExtras().getString("ukuran"));
         int image = getIntent().getIntExtra("gambar",0);
         gambar.setImageResource(image);
 
@@ -103,7 +103,7 @@ public class DetailProduk extends AppCompatActivity {
     }
     private void TambahSimpan(String sid_akun, String sid_produk) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.86.194:8000/api/tambahsimpan",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/tambahsimpan",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -151,7 +151,7 @@ public class DetailProduk extends AppCompatActivity {
     private void TambahKeranjang(String id_akun, String id_produk) {
 
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.86.194:8000/api/tambahkeranjang",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/tambahkeranjang",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

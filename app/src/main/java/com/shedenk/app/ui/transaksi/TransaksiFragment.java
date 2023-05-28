@@ -71,7 +71,7 @@ public class TransaksiFragment extends Fragment implements RecyclerViewListener 
 
         StringRequest stringRequest = new StringRequest(
 
-                Request.Method.POST, "http://192.168.86.194:8000/api/datatransaksi", new Response.Listener<String>() {
+                Request.Method.POST, "http://192.168.252.194:8000/api/datatransaksi", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

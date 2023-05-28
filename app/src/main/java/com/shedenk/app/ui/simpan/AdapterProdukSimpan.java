@@ -48,7 +48,6 @@ public class AdapterProdukSimpan extends RecyclerView.Adapter<AdapterProdukSimpa
             textHarga = itemView.findViewById(R.id.harga_produk_simpan);
             textKategori = itemView.findViewById(R.id.kategori_produk_simpan);
             textDeskripsi = itemView.findViewById(R.id.deskripsi_produk_simpan);
-            textUkuran = itemView.findViewById(R.id.ukuran_produk_simpan);
             imageProduk = itemView.findViewById(R.id.image_produk_simpan);
             btn_hapussimpan = itemView.findViewById(R.id.btn_hapus_simpan);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +91,6 @@ public class AdapterProdukSimpan extends RecyclerView.Adapter<AdapterProdukSimpa
         holder.textHarga.setText("Rp. " +produkItemModel.getHarga());
         holder.textKategori.setText("Kategori : " +produkItemModel.getKategori());
         holder.textDeskripsi.setText(produkItemModel.getDeskripsi());
-        holder.textUkuran.setText("Ukuran : "+produkItemModel.getUkuran());
 
         Glide.with(context).load(produkItemModel.getGambar()).apply(new RequestOptions().centerCrop()).into(holder.imageProduk);
 

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".RegisterActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#EA734D">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Profile"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15sp"/>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="100dp">
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:src="@drawable/p2">
+        </ImageView>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/editprofile_idakun"
+        android:layout_marginLeft="20dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:text="id_akun" />
+
+    <EditText
+        android:id="@+id/editprofile_nama"
+        android:layout_width="354dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:background="@drawable/custom_input"
+        android:paddingLeft="10dp"
+        android:drawablePadding="12dp"
+        android:drawableStart="@drawable/custom_input_person"
+        android:hint="nama"
+        android:textSize="14sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingRight="15dp"
+        android:paddingTop="20dp"
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="30dp"
+            android:src="@drawable/baseline_email_focused_24"
+            android:layout_marginLeft="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="#EA734D"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/editprofile_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zenong@gmail.com"
+            android:textSize="15sp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="5dp"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <EditText
+        android:id="@+id/editprofile_password"
+        android:layout_width="354dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:background="@drawable/custom_input"
+        android:paddingLeft="10dp"
+        android:drawablePadding="12dp"
+        android:drawableStart="@drawable/custom_input_lock"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="14sp"/>
+
+    <Button
+        android:id="@+id/btn_simpaneditprofile"
+        android:layout_width="354dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="Simpan"
+        android:textAlignment="center"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/custom_click_button"
+        android:textColor="@color/white"
+        />
+</LinearLayout>

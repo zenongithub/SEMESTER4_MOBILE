@@ -44,7 +44,6 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
             textHarga = itemView.findViewById(R.id.harga_produk_keranjang);
             textKategori = itemView.findViewById(R.id.kategori_produk_keranjang);
             textDeskripsi = itemView.findViewById(R.id.deskripsi_produk_keranjang);
-            textUkuran = itemView.findViewById(R.id.ukuran_produk_keranjang);
             imageProduk = itemView.findViewById(R.id.image_produk_keranjang);
             itemView.setOnClickListener(this);
 
@@ -83,23 +82,7 @@ public class AdapterProdukKeranjang extends RecyclerView.Adapter<AdapterProdukKe
         holder.textHarga.setText("Rp. " +produkItemModel.getHarga());
         holder.textKategori.setText("Kategori : " +produkItemModel.getKategori());
         holder.textDeskripsi.setText(produkItemModel.getDeskripsi());
-        holder.textUkuran.setText("Ukuran : "+produkItemModel.getUkuran());
         Glide.with(context).load(produkItemModel.getGambar()).apply(new RequestOptions().centerCrop()).into(holder.imageProduk);
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(view.getContext(), DetailProdukKeranjang.class);
-//
-//                intent.putExtra("id", produkItemModel.getId());
-//                intent.putExtra("nama", produkItemModel.getNama());
-//                intent.putExtra("harga", produkItemModel.getHarga());
-//                intent.putExtra("kategori", produkItemModel.getKategori());
-//                intent.putExtra("deskripsi", produkItemModel.getDeskripsi());
-//                intent.putExtra("ukuran", produkItemModel.getUkuran());
-//                intent.putExtra("gambar", produkItemModel.getGambar());
-//                view.getContext().startActivity(intent);
-//            }
-//        });
 
     }
 

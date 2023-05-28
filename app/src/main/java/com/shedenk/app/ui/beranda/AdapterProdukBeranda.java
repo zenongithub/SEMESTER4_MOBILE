@@ -46,7 +46,6 @@ public class AdapterProdukBeranda extends RecyclerView.Adapter<AdapterProdukBera
             textHarga = itemView.findViewById(R.id.harga_produk);
             textKategori = itemView.findViewById(R.id.kategori_produk);
             textDeskripsi = itemView.findViewById(R.id.deskripsi_produk);
-            textUkuran = itemView.findViewById(R.id.ukuran_produk);
             imageProduk = itemView.findViewById(R.id.image_produk);
             itemView.setOnClickListener(this);
         }
@@ -81,9 +80,7 @@ public class AdapterProdukBeranda extends RecyclerView.Adapter<AdapterProdukBera
         holder.textHarga.setText("Rp. " +produkItemModel.getHarga());
         holder.textKategori.setText("Kategori : " +produkItemModel.getKategori());
         holder.textDeskripsi.setText(produkItemModel.getDeskripsi());
-        holder.textUkuran.setText("Ukuran : "+produkItemModel.getUkuran());
         Glide.with(context).load(produkItemModel.getGambar()).apply(new RequestOptions().centerCrop()).into(holder.imageProduk);
-
     }
 
     @Override

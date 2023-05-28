@@ -64,7 +64,7 @@ public class DetailProdukKeranjang extends AppCompatActivity {
         hargakeranjang = findViewById(R.id.harga_detail_produkkeranjang);
         kategorikeranjang = findViewById(R.id.kategori_detail_produkkeranjang);
         deskripsikeranjang = findViewById(R.id.deskripsi_detail_produkkeranjang);
-        ukurankeranjang = findViewById(R.id.ukuran_detail_produkkeranjang);
+//        ukurankeranjang = findViewById(R.id.ukuran_detail_produkkeranjang);
         gambarkeranjang = findViewById(R.id.image_detail_produkkeranjang);
         btn_hapuskeranjang = findViewById(R.id.btn_hapus_keranjang);
 
@@ -73,7 +73,7 @@ public class DetailProdukKeranjang extends AppCompatActivity {
         hargakeranjang.setText("Rp. "+getIntent().getExtras().getString("harga"));
         kategorikeranjang.setText("Kategori : " +getIntent().getExtras().getString("kategori"));
         deskripsikeranjang.setText(getIntent().getExtras().getString("deskripsi"));
-        ukurankeranjang.setText("Ukuran : "+getIntent().getExtras().getString("ukuran"));
+//        ukurankeranjang.setText("Ukuran : "+getIntent().getExtras().getString("ukuran"));
         int image = getIntent().getIntExtra("gambar",0);
         gambarkeranjang.setImageResource(image);
 
@@ -97,7 +97,7 @@ public class DetailProdukKeranjang extends AppCompatActivity {
 
     private void HapusKeranjang(String hid_akun, String hid_produk) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.86.194:8000/api/hapuskeranjang",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/hapuskeranjang",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

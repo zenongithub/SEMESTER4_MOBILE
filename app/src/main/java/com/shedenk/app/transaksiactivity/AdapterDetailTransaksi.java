@@ -43,7 +43,6 @@ public class AdapterDetailTransaksi extends RecyclerView.Adapter<AdapterDetailTr
             textHarga = itemView.findViewById(R.id.harga_produk_detailtransaksi);
             textKategori = itemView.findViewById(R.id.kategori_produk_detailtransaksi);
             textDeskripsi = itemView.findViewById(R.id.deskripsi_produk_detailtransaksi);
-            textUkuran = itemView.findViewById(R.id.ukuran_produk_detailtransaksi);
             imageProduk = itemView.findViewById(R.id.image_produk_detailtransaksi);
             itemView.setOnClickListener(this);
 
@@ -82,7 +81,6 @@ public class AdapterDetailTransaksi extends RecyclerView.Adapter<AdapterDetailTr
         holder.textHarga.setText("Rp. " +produkItemModel.getHarga());
         holder.textKategori.setText(produkItemModel.getKategori());
         holder.textDeskripsi.setText(produkItemModel.getDeskripsi());
-        holder.textUkuran.setText(produkItemModel.getUkuran());
         Glide.with(context).load(produkItemModel.getGambar()).apply(new RequestOptions().centerCrop()).into(holder.imageProduk);
 
     }

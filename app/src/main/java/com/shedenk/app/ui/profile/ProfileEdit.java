@@ -1,8 +1,7 @@
-package com.shedenk.app;
+package com.shedenk.app.ui.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +20,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.shedenk.app.LoginActivity;
+import com.shedenk.app.R;
+import com.shedenk.app.RegisterActivity;
+import com.shedenk.app.VolleyConnection;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,62 +31,55 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity {
-
-    EditText nama, email,password;
-    Button register;
-    TextView login;
+public class ProfileEdit extends AppCompatActivity {
+    EditText nama, password;
+    TextView email, id;
+    Button simpan;
     ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_profile_edit);
 
-        nama =  findViewById(R.id.register_nama);
-        email = findViewById(R.id.register_email);
-        password = findViewById(R.id.register_password);
-        register = findViewById(R.id.btn_registers);
-        login = findViewById(R.id.txtlogin);
-        progressDialog = new ProgressDialog(RegisterActivity.this);
+        nama = findViewById(R.id.editprofile_nama);
+        password = findViewById(R.id.editprofile_password);
+        email = findViewById(R.id.editprofile_email);
+        id = findViewById(R.id.editprofile_idakun);
+        simpan = findViewById(R.id.btn_simpaneditprofile);
 
-        login.setOnClickListener(new View.OnClickListener() {
+        nama.setText(getIntent().getExtras().getString("namaakun"));
+        password.setText(getIntent().getExtras().getString("passwordakun"));
+        email.setText(getIntent().getExtras().getString("emailakun"));
+        id.setText(getIntent().getExtras().getString("idakun"));
+
+        simpan.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                String sid = id.getText().toString();
+                String snama = nama.getText().toString();
+                String spassword = password.getText().toString();
+
+                updateAkun(sid, snama, spassword);
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String sNama = nama.getText().toString();
-                String sEmail = email.getText().toString();
-                String sPassword = password.getText().toString();
-
-
-                CheckRegister(sNama, sEmail, sPassword);
-            }
-        });
     }
 
-    private void CheckRegister(String nama, String email, String password) {
+    private void updateAkun(String sid, String snama, String spassword) {
         if (checkNetworkConnection()) {
-            progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/register",
+//            progressDialog.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/update",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 String resp = jsonObject.getString("success");
-                                if (resp.equals("Berhasil Register Silahkan Login Kembali")) {
-
+                                if (resp.equals("Berhasil Update")) {
                                     Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    Intent intent = new Intent(ProfileEdit.this, LoginActivity.class);
                                     startActivity(intent);
-
                                 } else {
                                     Toast.makeText(getApplicationContext(), resp, Toast.LENGTH_SHORT).show();
                                 }
@@ -100,26 +96,25 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
-                    params.put("nama", nama);
-                    params.put("email", email);
-                    params.put("password", password);
+                    params.put("id_akun", sid);
+                    params.put("nama", snama);
+                    params.put("password", spassword);
                     return params;
                 }
             };
 
-            VolleyConnection.getInstance(RegisterActivity.this).addToRequestQue(stringRequest);
+            VolleyConnection.getInstance(ProfileEdit.this).addToRequestQue(stringRequest);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    progressDialog.cancel();
+//                    progressDialog.cancel();
                 }
             }, 2000);
         } else {
             Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_SHORT).show();
         }
     }
-
     public boolean checkNetworkConnection() {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();

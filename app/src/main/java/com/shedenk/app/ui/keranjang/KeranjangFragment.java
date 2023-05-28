@@ -42,6 +42,7 @@ import com.shedenk.app.SessionManager;
 import com.shedenk.app.databinding.FragmentKeranjangBinding;
 import com.shedenk.app.produk.DetailProdukKeranjang;
 import com.shedenk.app.produk.ProdukItemModel;
+import com.smarteist.autoimageslider.IndicatorView.animation.data.Value;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,6 +75,7 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
     private Context context;
     ArrayList<ProdukItemModel> data;
     int total = 0;
+    String namaproduk, hargaproduk, idproduk;
     private FragmentKeranjangBinding binding;
 
     private void loadData(Context context, String id){
@@ -84,21 +86,22 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
 
         StringRequest stringRequest = new StringRequest(
 
-                Request.Method.POST, "http://192.168.86.194:8000/api/datakeranjang", new Response.Listener<String>() {
+                Request.Method.POST, "http://192.168.252.194:8000/api/datakeranjang", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     Toast.makeText(context, "Berhasil Mengambil Data", Toast.LENGTH_SHORT).show();
                     JSONArray jo = new JSONArray(response);
-                    JSONObject object;
 
-                    for (int i =0; i < jo.length(); i++){
+                    JSONObject obj;
+                    for (int i = 0; i < jo.length(); i++){
+                        obj = jo.getJSONObject(i);
+                        JSONObject produk = new JSONObject(obj.getString("produk"));
 
-                        object = jo.getJSONObject(i);
-                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",""));
+                        JSONObject kategori = new JSONObject(produk.getString("kategori"));
+                        data.add(new ProdukItemModel(produk.getString("id_produk"), produk.getString("nama_produk"), produk.getString("harga"), kategori.getString("nama_kategori"),produk.getString("deskripsi"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80", obj.getString("id_akun")));
 
-                        total += Integer.valueOf(object.getString("harga"));
-
+                        total += Integer.valueOf(produk.getString("harga"));
                     }
                     total_barang.setText(String.valueOf(data.size()));
                     total_harga.setText(String.valueOf(total));
@@ -160,17 +163,65 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.slide2);
         scaleBitmap = Bitmap.createScaledBitmap(bitmap, 1200, 518, false);
 
-        ActivityCompat.requestPermissions( getActivity(), new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
-        createInvoice();
+        btn_pesan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions( getActivity(), new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+                createInvoice();
+
+                String stotal = String.valueOf(total);
+                String sid_akun = id_akun.getText().toString();
+
+                TambahAntrian(stotal, sid_akun);
+            }
+        });
 
         return view;
     }
 
-    private void createInvoice() {
-        btn_pesan.setOnClickListener(new View.OnClickListener() {
+    private void TambahAntrian(String stotal, String sid_akun) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/tambahantrian",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String resp = jsonObject.getString("success");
+                            if (resp.equals("Berhasil Menambahkan Antrian")) {
+                                Toast.makeText(getActivity(), "Berhasil Menambahkan Antrian", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "Gagal Menambahkan", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
-            public void onClick(View view) {
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Gagal Mengirim Data", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("id_akun", sid_akun);
+                params.put("total_harga", stotal);
+                JSONArray object = new JSONArray();
+                for (int i = 0; i < data.size(); i++){
+                    object.put(data.get(i).getId());
+                }
+                params.put("id_produk", object.toString());
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    private void createInvoice() {
                 dateTime = new Date();
 
                 //get input
@@ -222,9 +273,13 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
                     canvas.drawLine(180, 790, 180, 840, paint);
                     canvas.drawLine(880, 790, 880, 840, paint);
 
-                    canvas.drawText("1", 40, 920, paint);
-                    canvas.drawText("Sweetshirt Hitam", 200, 920, paint);
-                    canvas.drawText("Rp. 5000", 980, 920, paint);
+                    for (int a = 0; a < data.size(); a++){
+                        canvas.drawText(String.valueOf(a), 40, 920, paint);
+                        canvas.drawText(data.get(a).getNama(), 200, 920, paint);
+                        canvas.drawText(data.get(a).getHarga(), 980, 920, paint);
+                    }
+
+
 
                     paint.setColor(Color.rgb(247, 147, 30));
                     canvas.drawRect(680, 1350, pageWidth - 20, 1450, paint);
@@ -249,9 +304,7 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
 
                     Toast.makeText(getActivity(), "PDF sudah dibuat", Toast.LENGTH_LONG).show();
                 }
-            }
-        });
-    }
+            };
 
 
     @Override
@@ -269,7 +322,6 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
                 intent.putExtra("harga", data.get(position).getHarga());
                 intent.putExtra("kategori", data.get(position).getKategori());
                 intent.putExtra("deskripsi", data.get(position).getDeskripsi());
-                intent.putExtra("ukuran", data.get(position).getUkuran());
                 intent.putExtra("gambar", data.get(position).getGambar());
                 startActivityForResult(intent, 1);
             }

@@ -36,7 +36,6 @@ import java.util.Map;
 public class DetailTransaksi extends AppCompatActivity implements RecyclerViewListener {
 
     TextView id_transaksi, total_harga, tgl_transaksi, status;
-
     AdapterDetailTransaksi adapterDetailTransaksi;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -51,7 +50,7 @@ public class DetailTransaksi extends AppCompatActivity implements RecyclerViewLi
 
         StringRequest stringRequest = new StringRequest(
 
-                Request.Method.POST, "http://192.168.86.194:8000/api/datadetailtransaksi", new Response.Listener<String>() {
+                Request.Method.POST, "http://192.168.252.194:8000/api/datadetailtransaksi", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -62,7 +61,7 @@ public class DetailTransaksi extends AppCompatActivity implements RecyclerViewLi
                     for (int i =0; i < jo.length(); i++){
 
                         object = jo.getJSONObject(i);
-                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80", ""));
+                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),"https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80", ""));
                     }
 
                     layoutManager = new GridLayoutManager(getApplicationContext(),1);
@@ -115,12 +114,10 @@ public class DetailTransaksi extends AppCompatActivity implements RecyclerViewLi
         status.setText(getIntent().getExtras().getString("status_transaksi"));
 
         loadData(id_transaksi.getText().toString());
-
     }
 
     @Override
     public void onClickItem(View view, int position) {
-
 
     }
 

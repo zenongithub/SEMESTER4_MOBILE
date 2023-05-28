@@ -18,6 +18,7 @@ import com.shedenk.app.LoginActivity;
 import com.shedenk.app.R;
 import com.shedenk.app.SessionManager;
 import com.shedenk.app.databinding.FragmentProfileBinding;
+import com.shedenk.app.produk.DetailProdukKeranjang;
 
 import java.util.HashMap;
 
@@ -35,10 +36,10 @@ public class ProfileFragment extends Fragment {
         sessionManager = new SessionManager(getActivity());
         sessionManager.checkLogin();
 
-        id = view.findViewById(R.id.profile_id);
-        nama = view.findViewById(R.id.profile_nama);
-        email = view.findViewById(R.id.profile_email);
-        password = view.findViewById(R.id.profile_password);
+        id = view.findViewById(R.id.id_akunprofile);
+        nama = view.findViewById(R.id.nama_akunprofile);
+        email = view.findViewById(R.id.email_akunprofile);
+        password = view.findViewById(R.id.password_akunprofile);
 
 
         HashMap<String,String> user = sessionManager.getUserDetail();
@@ -59,6 +60,20 @@ public class ProfileFragment extends Fragment {
                 sessionManager.logout();
                 Intent LoginIntent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(LoginIntent);
+            }
+        });
+        Button btneditprofile = view.findViewById(R.id.btn_EditProfile);
+        btneditprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ProfileEdit.class);
+
+                intent.putExtra("idakun", id.getText());
+                intent.putExtra("namaakun", nama.getText());
+                intent.putExtra("emailakun", email.getText());
+                intent.putExtra("passwordakun", password.getText());
+
+                startActivityForResult(intent, 1);
             }
         });
 

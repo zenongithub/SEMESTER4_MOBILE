@@ -66,18 +66,26 @@ public class BerandaFragment extends Fragment implements RecyclerViewListener {
         StringRequest stringRequest = new StringRequest(
 
 
-                Request.Method.GET, "http://192.168.86.194:8000/api/getDataProduk", new Response.Listener<String>() {
+                Request.Method.GET, "http://192.168.252.194:8000/api/dataproduk", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     Toast.makeText(container.getContext(), "Berhasil Mengambil Data", Toast.LENGTH_SHORT).show();
                     JSONArray jo = new JSONArray(response);
                     JSONObject object;
+                    JSONObject kategori;
+//                    JSONArray gambar = new JSONArray("gambar");
+////                    JSONObject object2;
 
                     for (int i =0; i < jo.length(); i++){
-                        object = jo.getJSONObject(i);
-                        data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(object.getString("nama_kategori")),object.getString("deskripsi"),object.getString("ukuran"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",""));
-                    }
+//                        for (int a=0; a<gambar.length(); a++){
+                            object = jo.getJSONObject(i);
+//                            object2 = gambar.getJSONObject(a);
+                            kategori = new JSONObject(object.getString("kategori"));
+                            data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(kategori.getString("nama_kategori")),object.getString("deskripsi"), "https://plus.unsplash.com/premium_photo-1666264200754-1a2d5f2f6695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",""));
+
+                        }
+//                    }
 
                     layoutManager = new GridLayoutManager(getActivity(),2);
                     recyclerView.setLayoutManager(layoutManager);
@@ -87,6 +95,7 @@ public class BerandaFragment extends Fragment implements RecyclerViewListener {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -115,7 +124,6 @@ public class BerandaFragment extends Fragment implements RecyclerViewListener {
         intent.putExtra("harga", data.get(position).getHarga());
         intent.putExtra("kategori", data.get(position).getKategori());
         intent.putExtra("deskripsi", data.get(position).getDeskripsi());
-        intent.putExtra("ukuran", data.get(position).getUkuran());
         intent.putExtra("gambar", data.get(position).getGambar());
         startActivity(intent);
     }

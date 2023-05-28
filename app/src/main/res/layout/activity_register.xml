@@ -55,7 +55,7 @@
         android:background="@drawable/custom_input"
         android:paddingLeft="10dp"
         android:drawablePadding="12dp"
-        android:drawableStart="@drawable/custom_input_email"
+        android:drawableStart="@drawable/custom_input_person"
         android:hint="nama"
         android:textSize="14sp"/>
 

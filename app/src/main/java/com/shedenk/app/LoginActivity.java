@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
     public void CheckLogin(final String email, final String password) {
         if (checkNetworkConnection()) {
             progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.86.194:8000/api/login",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/login",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

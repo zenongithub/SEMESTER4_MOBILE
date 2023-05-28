@@ -51,14 +51,6 @@
                     android:text="Rp.5.000.000" />
 
                 <TextView
-                    android:id="@+id/ukuran_produk_detailtransaksi"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:text="XL"
-                    android:visibility="invisible"
-                    android:textSize="15sp" />
-
-                <TextView
                     android:id="@+id/kategori_produk_detailtransaksi"
                     android:layout_width="0dp"
                     android:layout_height="0dp"

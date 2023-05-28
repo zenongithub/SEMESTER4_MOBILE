@@ -2,14 +2,7 @@ package com.shedenk.app.transaksiactivity;
 
 public class TransaksiModel {
 
-    String id_akun;
-    String id_transaksi;
-    String tanggal;
-    String total_produk;
-    String total_harga;
-    String status_transaksi;
-
-
+    String id_akun, id_transaksi, tanggal, total_produk, total_harga, status_transaksi;
     public TransaksiModel(String id_akun, String id_transaksi, String tanggal, String total_produk, String total_harga, String status_transaksi) {
         this.id_akun = id_akun;
         this.id_transaksi = id_transaksi;
