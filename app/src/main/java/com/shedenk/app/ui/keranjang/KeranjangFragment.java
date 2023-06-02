@@ -75,6 +75,7 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
     AdapterProdukKeranjang adapterProdukKeranjang;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    String id_antrian;
     private Context context;
     ArrayList<ProdukItemModel> data;
     int total = 0;
@@ -89,7 +90,7 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
 
         StringRequest stringRequest = new StringRequest(
 
-                Request.Method.POST, "http://192.168.252.194:8000/api/datakeranjang", new Response.Listener<String>() {
+                Request.Method.POST, "https://shedenk.aliftrd.my.id/api/datakeranjang", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -106,7 +107,7 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
                         JSONArray gam = produk.getJSONArray("gambar");
                         for (int a = 0; a < gam.length(); a++){
                             objectgambar = gam.getJSONObject(a);
-                            data.add(new ProdukItemModel(produk.getString("id_produk"), produk.getString("nama_produk"), produk.getString("harga"),(kategori.getString("nama_kategori")),produk.getString("deskripsi"), "http://192.168.252.194:8000" + "/produk_img/" + objectgambar.getString("nama_gambar"),""));
+                            data.add(new ProdukItemModel(produk.getString("id_produk"), produk.getString("nama_produk"), produk.getString("harga"),(kategori.getString("nama_kategori")),produk.getString("deskripsi"), "https://shedenk.aliftrd.my.id" + "/upload/" + objectgambar.getString("nama_gambar"),""));
                         }
                         total += Integer.valueOf(produk.getString("harga"));
                     }
@@ -174,27 +175,38 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
         btn_pesan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("Apakah Ingin Mencetak Pesanan?")
-                        .setConfirmText("Ya, Cetak!")
-                        .setCancelText("Batal")
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                String stotal = String.valueOf(total);
-                                String sid_akun = id_akun.getText().toString();
+                if(data.size() == 0){
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Tidak ada Data Dalam Keranjang")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
+                            }).show();
+                } else {
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Apakah Ingin Mencetak Pesanan?")
+                            .setConfirmText("Ya, Cetak!")
+                            .setCancelText("Batal")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    String stotal = String.valueOf(total);
+                                    String sid_akun = id_akun.getText().toString();
 
-                                TambahAntrian(stotal, sid_akun);
-                                sDialog.dismissWithAnimation();
-                            }
-                        })
-                        .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                sDialog.dismissWithAnimation();
-                            }
-                        })
-                        .show();
+                                    TambahAntrian(stotal, sid_akun);
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+                }
             }
         });
 
@@ -206,17 +218,26 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
         System.out.println(data.size());
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/tambahantrian",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/tambahantrian",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String resp = jsonObject.getString("success");
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            JSONObject objectid;
+
                             if (resp.equals("Berhasil Menambahkan Antrian")) {
+                                for (int i = 0 ; i < data.length(); i++){
+                                    objectid = data.getJSONObject(i);
+
+                                    id_antrian = String.valueOf(objectid.getString("id_antrian"));
+                                    createInvoice();
+//                                    System.out.println(id_antrian);
+                                }
 //                                Toast.makeText(getActivity(), "Berhasil Menambahkan Antrian", Toast.LENGTH_SHORT).show();
 //                                System.out.println(data.size());
-                                    createInvoice();
                             } else {
                                 Toast.makeText(getActivity(), "Gagal Menambahkan", Toast.LENGTH_SHORT).show();
                             }
@@ -281,7 +302,7 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
                     canvas.drawText("Email: " + email_akun.getText(), 20, 640, paint);
 
                     paint.setTextAlign(Paint.Align.RIGHT);
-                    canvas.drawText("No. Pesanan: " + "PS0001", pageWidth - 20, 590, paint);
+                    canvas.drawText("No. Pesanan: " + id_antrian, pageWidth - 20, 590, paint);
 
                     dateFormat = new SimpleDateFormat("dd/MM/yy");
                     canvas.drawText("Tanggal: " + dateFormat.format(dateTime), pageWidth - 20, 640, paint);
@@ -303,9 +324,9 @@ public class KeranjangFragment extends Fragment implements RecyclerViewListener 
                     canvas.drawLine(880, 790, 880, 840, paint);
 
                     for (int a = 0; a < data.size(); a++){
-                        canvas.drawText(String.valueOf(a), 40, 920, paint);
-                        canvas.drawText(data.get(a).getNama(), 200, 920, paint);
-                        canvas.drawText(data.get(a).getHarga(), 980, 920, paint);
+                        canvas.drawText(String.valueOf(a+1), 40, 920 + 50 * a, paint);
+                        canvas.drawText(data.get(a).getNama(), 200, 920 + 50 * a, paint);
+                        canvas.drawText(data.get(a).getHarga(), 980, 920 + 50 * a, paint);
                     }
 
 

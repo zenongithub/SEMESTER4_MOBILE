@@ -50,7 +50,7 @@ public class DetailTransaksi extends AppCompatActivity implements RecyclerViewLi
 
         StringRequest stringRequest = new StringRequest(
 
-                Request.Method.POST, "http://192.168.252.194:8000/api/datadetailtransaksi", new Response.Listener<String>() {
+                Request.Method.POST, "https://shedenk.aliftrd.my.id/api/datadetailtransaksi", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -66,7 +66,7 @@ public class DetailTransaksi extends AppCompatActivity implements RecyclerViewLi
                         JSONArray gam = new JSONArray(produk.getString("gambar"));
                         for (int a = 0; a < gam.length(); a++){
                             objectgambar = gam.getJSONObject(a);
-                            data.add(new ProdukItemModel(produk.getString("id_produk"), produk.getString("nama_produk"), produk.getString("harga"),(kategori.getString("nama_kategori")),produk.getString("deskripsi"), "http://192.168.252.194:8000" + "/produk_img/" + objectgambar.getString("nama_gambar"),""));
+                            data.add(new ProdukItemModel(produk.getString("id_produk"), produk.getString("nama_produk"), produk.getString("harga"),(kategori.getString("nama_kategori")),produk.getString("deskripsi"), "https://shedenk.aliftrd.my.id" + "/upload/" + objectgambar.getString("nama_gambar"),""));
                         }
                     }
 
@@ -117,7 +117,7 @@ public class DetailTransaksi extends AppCompatActivity implements RecyclerViewLi
         id_transaksi.setText(getIntent().getExtras().getString("id_transaksi"));
         total_harga.setText(getIntent().getExtras().getString("total_hargatransaksi"));
         tgl_transaksi.setText(getIntent().getExtras().getString("tgl_transaksi"));
-        status.setText(getIntent().getExtras().getString("status_transaksi"));
+//        status.setText(getIntent().getExtras().getString("status_transaksi"));
 
         loadData(id_transaksi.getText().toString());
     }

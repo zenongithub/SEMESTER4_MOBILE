@@ -88,7 +88,7 @@ public class ProfileEdit extends AppCompatActivity {
     private void updateAkun(String sid, String snama, String spassword) {
         if (checkNetworkConnection()) {
 //            progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/update",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/update",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

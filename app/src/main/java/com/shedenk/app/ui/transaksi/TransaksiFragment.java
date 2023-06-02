@@ -71,7 +71,7 @@ public class TransaksiFragment extends Fragment implements RecyclerViewListener 
 
         StringRequest stringRequest = new StringRequest(
 
-                Request.Method.POST, "http://192.168.252.194:8000/api/datatransaksi", new Response.Listener<String>() {
+                Request.Method.POST, "https://shedenk.aliftrd.my.id/api/datatransaksi", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -82,7 +82,7 @@ public class TransaksiFragment extends Fragment implements RecyclerViewListener 
                     for (int i =0; i < jo.length(); i++){
 
                         object = jo.getJSONObject(i);
-                        data.add(new TransaksiModel("", object.getString("id_transaksi"), object.getString("tgl_transaksi"), object.getString("jumlah_pesanan"),object.getString("total_harga"),object.getString("status_transaksi") ));
+                        data.add(new TransaksiModel("", object.getString("id_transaksi"), object.getString("tgl_transaksi"), object.getString("jumlah_pesanan"),object.getString("total_harga")));
 
                     }
 
@@ -128,7 +128,7 @@ public class TransaksiFragment extends Fragment implements RecyclerViewListener 
         intent.putExtra("tgl_transaksi", data.get(position).getTanggal());
         intent.putExtra("total_hargatransaksi", data.get(position).getTotal_harga());
         intent.putExtra("jumlah_produk", data.get(position).getTotal_produk());
-        intent.putExtra("status_transaksi", data.get(position).getStatus_transaksi());
+//        intent.putExtra("status_transaksi", data.get(position).getStatus_transaksi());
         startActivity(intent);
     }
 

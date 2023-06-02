@@ -108,7 +108,7 @@ public class DetailProduk extends AppCompatActivity {
     }
     private void TambahSimpan(String sid_akun, String sid_produk) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/tambahsimpan",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/tambahsimpan",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -166,7 +166,7 @@ public class DetailProduk extends AppCompatActivity {
     private void TambahKeranjang(String id_akun, String id_produk) {
 
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/tambahkeranjang",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/tambahkeranjang",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

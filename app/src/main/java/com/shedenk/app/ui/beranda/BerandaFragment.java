@@ -66,7 +66,7 @@ public class BerandaFragment extends Fragment implements RecyclerViewListener {
         StringRequest stringRequest = new StringRequest(
 
 
-                Request.Method.GET, "http://192.168.252.194:8000/api/dataproduk", new Response.Listener<String>() {
+                Request.Method.GET, "https://shedenk.aliftrd.my.id/api/dataproduk", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -82,7 +82,7 @@ public class BerandaFragment extends Fragment implements RecyclerViewListener {
                         JSONArray gam = new JSONArray(object.getString("gambar"));
                         for (int a = 0; a < gam.length(); a++){
                             objectgambar = gam.getJSONObject(a);
-                            data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(kategori.getString("nama_kategori")),object.getString("deskripsi"), "http://192.168.252.194:8000" + "/produk_img/" + objectgambar.getString("nama_gambar"),""));
+                            data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(kategori.getString("nama_kategori")),object.getString("deskripsi"), "https://shedenk.aliftrd.my.id" + "/upload/" + objectgambar.getString("nama_gambar"),""));
                         }
                     }
 

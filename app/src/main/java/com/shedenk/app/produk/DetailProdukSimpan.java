@@ -90,7 +90,7 @@ public class DetailProdukSimpan extends AppCompatActivity {
 
     private void TambahKeranjang(String kid_akun, String kid_produk) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/tambahkeranjang",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/tambahkeranjang",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

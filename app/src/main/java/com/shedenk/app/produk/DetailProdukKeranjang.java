@@ -98,7 +98,7 @@ public class DetailProdukKeranjang extends AppCompatActivity {
 
     private void HapusKeranjang(String hid_akun, String hid_produk) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/hapuskeranjang",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/hapuskeranjang",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

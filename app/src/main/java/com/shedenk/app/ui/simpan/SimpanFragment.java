@@ -66,7 +66,7 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
 
         StringRequest stringRequest = new StringRequest(
 
-                Request.Method.POST, "http://192.168.252.194:8000/api/datasimpan", new Response.Listener<String>() {
+                Request.Method.POST, "https://shedenk.aliftrd.my.id/api/datasimpan", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -82,7 +82,7 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
                         JSONArray gam = new JSONArray(produk.getString("gambar"));
                         for (int a = 0; a < gam.length(); a++){
                             objectgambar = gam.getJSONObject(a);
-                            data.add(new ProdukItemModel(produk.getString("id_produk"), produk.getString("nama_produk"), produk.getString("harga"),(kategori.getString("nama_kategori")),produk.getString("deskripsi"), "http://192.168.252.194:8000" + "/produk_img/" + objectgambar.getString("nama_gambar"),""));
+                            data.add(new ProdukItemModel(produk.getString("id_produk"), produk.getString("nama_produk"), produk.getString("harga"),(kategori.getString("nama_kategori")),produk.getString("deskripsi"), "https://shedenk.aliftrd.my.id" + "/upload/" + objectgambar.getString("nama_gambar"),""));
                         }
                     }
                     layoutManager = new GridLayoutManager(getActivity(),1);
@@ -184,7 +184,7 @@ public class SimpanFragment extends Fragment implements RecyclerViewListener {
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/hapussimpan",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/hapussimpan",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

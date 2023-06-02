@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void CheckRegister(String nama, String email, String password) {
         if (checkNetworkConnection()) {
             progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.252.194:8000/api/register",
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/register",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

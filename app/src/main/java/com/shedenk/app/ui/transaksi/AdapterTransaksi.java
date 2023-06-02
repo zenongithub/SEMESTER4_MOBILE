@@ -69,9 +69,9 @@ public class AdapterTransaksi extends RecyclerView.Adapter<AdapterTransaksi.View
 
         holder.textid.setText("No Transaksi :  "+transaksiModel.getId_transaksi());
         holder.textTgl.setText("Tanggal Transaksi : " +transaksiModel.getTanggal());
-        holder.textTotal_barang.setText("Jumlah Barang : " +transaksiModel.getTotal_produk());
+        holder.textTotal_barang.setText("Jumlah Pesanan : " +transaksiModel.getTotal_produk());
         holder.textTotal_harga.setText("Total Harga : " +"Rp. "+transaksiModel.getTotal_harga());
-        holder.status_transaksi.setText("Status : " +transaksiModel.getStatus_transaksi());
+//        holder.status_transaksi.setText("Status : " +transaksiModel.getStatus_transaksi());
     }
 
     @Override
