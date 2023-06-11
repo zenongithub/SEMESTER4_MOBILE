@@ -74,12 +74,20 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="14sp"/>
+    
+    <CheckBox
+        android:id="@+id/showpassword_login"
+        android:layout_width="166dp"
+        android:layout_height="25dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="20dp"
+        android:text="Lihat Password"/>
 
     <Button
         android:id="@+id/btnlogin"
         android:layout_width="354dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Login"
         android:textAlignment="center"
         android:layout_marginLeft="20dp"

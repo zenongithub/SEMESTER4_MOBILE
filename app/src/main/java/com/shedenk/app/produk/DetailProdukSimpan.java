@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.shedenk.app.Env;
 import com.shedenk.app.R;
 import com.shedenk.app.SessionManager;
 import com.shedenk.app.VolleyConnection;
@@ -90,7 +91,8 @@ public class DetailProdukSimpan extends AppCompatActivity {
 
     private void TambahKeranjang(String kid_akun, String kid_produk) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/tambahkeranjang",
+            String url = Env.BASE_URL + "tambahkeranjang";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

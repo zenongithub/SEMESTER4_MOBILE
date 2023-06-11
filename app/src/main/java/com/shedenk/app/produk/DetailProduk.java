@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.shedenk.app.Env;
 import com.shedenk.app.HomeActivity;
 import com.shedenk.app.LoginActivity;
 import com.shedenk.app.R;
@@ -108,7 +109,8 @@ public class DetailProduk extends AppCompatActivity {
     }
     private void TambahSimpan(String sid_akun, String sid_produk) {
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/tambahsimpan",
+            String url = Env.BASE_URL + "tambahsimpan";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -166,7 +168,8 @@ public class DetailProduk extends AppCompatActivity {
     private void TambahKeranjang(String id_akun, String id_produk) {
 
         if (checkNetworkConnection()) {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/tambahkeranjang",
+            String url = Env.BASE_URL + "tambahkeranjang";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

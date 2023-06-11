@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.shedenk.app.Env;
 import com.shedenk.app.R;
 import com.shedenk.app.RecyclerViewListener;
 import com.shedenk.app.databinding.FragmentBerandaBinding;
@@ -62,11 +63,11 @@ public class BerandaFragment extends Fragment implements RecyclerViewListener {
 
         RequestQueue queue = Volley.newRequestQueue(container.getContext());
 
-
+        String url = Env.BASE_URL + "dataproduk";
         StringRequest stringRequest = new StringRequest(
 
 
-                Request.Method.GET, "https://shedenk.aliftrd.my.id/api/dataproduk", new Response.Listener<String>() {
+                Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -82,7 +83,7 @@ public class BerandaFragment extends Fragment implements RecyclerViewListener {
                         JSONArray gam = new JSONArray(object.getString("gambar"));
                         for (int a = 0; a < gam.length(); a++){
                             objectgambar = gam.getJSONObject(a);
-                            data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(kategori.getString("nama_kategori")),object.getString("deskripsi"), "https://shedenk.aliftrd.my.id" + "/upload/" + objectgambar.getString("nama_gambar"),""));
+                            data.add(new ProdukItemModel(object.getString("id_produk"), object.getString("nama_produk"), object.getString("harga"),(kategori.getString("nama_kategori")),object.getString("deskripsi"), Env.IMAGE_URL + objectgambar.getString("nama_gambar"),""));
                         }
                     }
 

@@ -9,8 +9,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +24,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.shedenk.app.Env;
 import com.shedenk.app.HomeActivity;
 import com.shedenk.app.LoginActivity;
 import com.shedenk.app.R;
@@ -36,6 +41,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ProfileEdit extends AppCompatActivity {
     EditText nama, password;
+    CheckBox show;
     TextView email, id;
     Button simpan;
     ProgressDialog progressDialog;
@@ -47,6 +53,7 @@ public class ProfileEdit extends AppCompatActivity {
 
         nama = findViewById(R.id.editprofile_nama);
         password = findViewById(R.id.editprofile_password);
+        show = findViewById(R.id.showpassword_profile);
         email = findViewById(R.id.editprofile_email);
         id = findViewById(R.id.editprofile_idakun);
         simpan = findViewById(R.id.btn_simpaneditprofile);
@@ -55,6 +62,17 @@ public class ProfileEdit extends AppCompatActivity {
         password.setText(getIntent().getExtras().getString("passwordakun"));
         email.setText(getIntent().getExtras().getString("emailakun"));
         id.setText(getIntent().getExtras().getString("idakun"));
+
+        show.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (!b){
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }else {
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
 
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +106,8 @@ public class ProfileEdit extends AppCompatActivity {
     private void updateAkun(String sid, String snama, String spassword) {
         if (checkNetworkConnection()) {
 //            progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/update",
+            String url = Env.BASE_URL + "update";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

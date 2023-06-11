@@ -10,8 +10,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +38,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText nama, email,password;
+    CheckBox show;
     Button register;
     TextView login;
     ProgressDialog progressDialog;
@@ -46,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         nama =  findViewById(R.id.register_nama);
         email = findViewById(R.id.register_email);
         password = findViewById(R.id.register_password);
+        show = findViewById(R.id.showpassword_register);
         register = findViewById(R.id.btn_registers);
         login = findViewById(R.id.txtlogin);
         progressDialog = new ProgressDialog(RegisterActivity.this);
@@ -55,6 +61,17 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        show.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (!b){
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }else {
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
             }
         });
 
@@ -74,7 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
     private void CheckRegister(String nama, String email, String password) {
         if (checkNetworkConnection()) {
             progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/register",
+            String url = Env.BASE_URL + "register";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

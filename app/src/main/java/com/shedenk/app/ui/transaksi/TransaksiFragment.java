@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.shedenk.app.Env;
 import com.shedenk.app.R;
 import com.shedenk.app.RecyclerViewListener;
 import com.shedenk.app.SessionManager;
@@ -68,10 +69,8 @@ public class TransaksiFragment extends Fragment implements RecyclerViewListener 
         data = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(container.getContext());
 
-
-        StringRequest stringRequest = new StringRequest(
-
-                Request.Method.POST, "https://shedenk.aliftrd.my.id/api/datatransaksi", new Response.Listener<String>() {
+        String url = Env.BASE_URL + "datatransaksi";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

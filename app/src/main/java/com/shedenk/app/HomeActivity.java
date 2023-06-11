@@ -24,13 +24,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
+//        navView.getMaxItemCount();
+
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_beranda, R.id.navigation_simpan, R.id.navigation_keranjang, R.id.navigation_transaksi, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.home_page);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
+//        navView.getMenu().clear();
     }
-
 }

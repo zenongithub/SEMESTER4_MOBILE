@@ -116,6 +116,14 @@
         android:inputType="textPassword"
         android:textSize="14sp"/>
 
+    <CheckBox
+        android:id="@+id/showpassword_profile"
+        android:layout_width="166dp"
+        android:layout_height="25dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="20dp"
+        android:text="Lihat Password"/>
+
     <Button
         android:id="@+id/btn_simpaneditprofile"
         android:layout_width="354dp"

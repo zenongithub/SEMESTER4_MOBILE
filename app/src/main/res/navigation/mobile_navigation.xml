@@ -23,6 +23,12 @@
         android:label="@string/title_keranjang"
         tools:layout="@layout/fragment_keranjang" />
 
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_pesanan"-->
+<!--        android:name="com.shedenk.app.ui.pesanan.PesananFragment"-->
+<!--        android:label="@string/title_pesanan"-->
+<!--        tools:layout="@layout/fragment_pesanan" />-->
+
     <fragment
         android:id="@+id/navigation_transaksi"
         android:name="com.shedenk.app.ui.transaksi.TransaksiFragment"

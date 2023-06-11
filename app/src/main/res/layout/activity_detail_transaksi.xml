@@ -20,7 +20,7 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="15sp"/>
+            android:textSize="20sp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

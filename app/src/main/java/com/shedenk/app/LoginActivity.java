@@ -11,8 +11,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email, password;
     Button login;
     TextView register;
+    CheckBox show;
     ProgressDialog progressDialog;
     SharedPreferences sharedPreferences;
     SessionManager sessionManager;
@@ -54,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.TextEmail);
         password = (EditText) findViewById(R.id.TextPassword);
+        show = (CheckBox) findViewById(R.id.showpassword_login);
         login = (Button) findViewById(R.id.btnlogin);
         register = (TextView) findViewById(R.id.txtregister);
         progressDialog = new ProgressDialog(LoginActivity.this);
@@ -64,6 +70,17 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
+            }
+        });
+
+        show.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (!b){
+                    password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }else {
+                    password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
             }
         });
 
@@ -81,7 +98,8 @@ public class LoginActivity extends AppCompatActivity {
     public void CheckLogin(final String email, final String password) {
         if (checkNetworkConnection()) {
             progressDialog.show();
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://shedenk.aliftrd.my.id/api/login",
+            String url = Env.BASE_URL + "login";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

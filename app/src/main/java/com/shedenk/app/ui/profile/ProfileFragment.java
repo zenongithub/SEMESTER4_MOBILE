@@ -27,7 +27,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
-
     SessionManager sessionManager;
     TextView id, nama, email, password;
 

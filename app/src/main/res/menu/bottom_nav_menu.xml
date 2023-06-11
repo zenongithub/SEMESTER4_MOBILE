@@ -16,6 +16,11 @@
         android:icon="@drawable/baseline_shopping_cart_24"
         android:title="@string/title_keranjang" />
 
+<!--    <item-->
+<!--        android:id="@+id/navigation_pesanan"-->
+<!--        android:icon="@drawable/baseline_beenhere_24"-->
+<!--        android:title="@string/title_pesanan"/>-->
+
     <item
         android:id="@+id/navigation_transaksi"
         android:icon="@drawable/baseline_dvr_24"

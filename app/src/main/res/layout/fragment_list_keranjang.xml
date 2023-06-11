@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.keranjang.ListKeranjangFragment"
+    android:id="@+id/fragment_keranjang">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="473dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_akun_keranjang"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="id_akun"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/nama_akun_keranjang"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="nama_akun"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/email_akun_keranjang"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="email_akun"
+                android:visibility="invisible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_keranjang"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/katalog_keranjang" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="start"
+            android:elevation="3dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Total Barang :"
+                android:layout_marginLeft="30dp"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/total_barang"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="4"
+                android:layout_marginLeft="50dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="start">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Total Harga :"
+                android:layout_marginLeft="30dp"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/total_harga"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Rp. 500.000"
+                android:layout_marginLeft="50dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btncheckout"
+            android:layout_width="354dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:text="Pesan"
+            android:textAlignment="center"
+            android:background="@drawable/custom_click_button"
+            android:textColor="@color/white"
+
+            />
+
+
+    </LinearLayout>
+
+</FrameLayout>

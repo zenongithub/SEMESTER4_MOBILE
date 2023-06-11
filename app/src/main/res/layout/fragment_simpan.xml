@@ -14,7 +14,18 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:background="#EA734D"/>
+            android:background="#EA734D">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="LIST SIMPAN"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20sp"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
         <TextView
             android:id="@+id/id_akun_simpan"
             android:layout_width="0dp"
