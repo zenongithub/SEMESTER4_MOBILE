@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pesanan.DetailPesanan">
+    tools:context=".pesanan.DetailPesanan"
+    android:background="@drawable/dialog_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,17 +16,41 @@
             android:id="@+id/id_detailpesanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ID PESANAN"/>
+            android:text="ID PESANAN"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/totalharga_detailpesanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TOTAL HARGA"
+            android:layout_marginTop="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
 
         <Button
             android:id="@+id/btn_pembayaran"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_click_button"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="Upload Pembayaran"
+            android:textColor="@color/white"/>
 
         <ImageView
             android:id="@+id/view_pembayaran"
             android:layout_width="match_parent"
-            android:layout_height="306dp" />
+            android:layout_height="216dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg"
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 

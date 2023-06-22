@@ -203,24 +203,24 @@ public class ListKeranjangFragment extends Fragment implements RecyclerViewListe
 
         System.out.println(data.size());
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = Env.BASE_URL + "tambahantrian";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        String url2 = Env.BASE_URL + "tambahantrian";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url2,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String resp = jsonObject.getString("success");
-                            JSONArray data = jsonObject.getJSONArray("data");
-                            JSONObject objectid;
+//                            JSONArray data = jsonObject.getJSONArray("data");
+//                            JSONObject objectid;
 
                             if (resp.equals("Berhasil Menambahkan Antrian")) {
-                                for (int i = 0 ; i < data.length(); i++){
-                                    objectid = data.getJSONObject(i);
-                                    id_antrian = String.valueOf(objectid.getString("id_antrian"));
+//                                for (int i = 0 ; i < data.length(); i++){
+//                                    objectid = data.getJSONObject(i);
+//                                    id_antrian = String.valueOf(objectid.getString("id_antrian"));
 //                                    createInvoice();
 //                                    System.out.println(id_antrian);
-                                }
+//                                }
                                 Toast.makeText(getActivity(), "Berhasil Menambahkan Pesanan", Toast.LENGTH_SHORT).show();
 //                                System.out.println(data.size());
                             } else {
@@ -235,7 +235,7 @@ public class ListKeranjangFragment extends Fragment implements RecyclerViewListe
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Gagal Mengirim Data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Gagal Mengirim Data" + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
